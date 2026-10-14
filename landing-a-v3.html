@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Partner Finance — Pre-IPO · v3 «Cinematic Scroll»</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/hands-terminal.png">
+<link rel="preload" as="image" href="assets/space-manifest.jpg">
+<style>
+:root{
+  --blue:#0E2773; --blue2:#1438A6; --blue3:#1455D8; --red:#BF1736;
+  --ink:#1D1D1B; --gray:#575756; --line:#E8E9F2; --soft:#F4F5FA; --badge:#E4EBFF;
+  --dark:#070B1A; --dark2:#101736; --green:#17C784; --up:#3DFFA8;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Open Sans',sans-serif;color:var(--ink);background:#fff;overflow-x:hidden}
+h1,h2,h3,.m{font-family:'Montserrat',sans-serif}
+.wrap{max-width:1200px;margin:0 auto;padding:0 48px}
+section{padding:96px 0}
+.kicker{font-family:'Montserrat';font-weight:700;font-size:12px;letter-spacing:3px;color:var(--red);text-transform:uppercase;margin-bottom:18px}
+.h2{font-family:'Montserrat';font-weight:800;font-size:40px;line-height:1.15;color:var(--blue);margin-bottom:16px}
+.lead{font-size:17px;line-height:1.65;color:var(--gray);max-width:640px}
+.btn{display:inline-block;font-family:'Montserrat';font-weight:700;font-size:15px;border-radius:40px;padding:16px 30px;cursor:pointer;text-decoration:none;border:none;transition:transform .15s, box-shadow .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn-red{color:#fff;background:var(--red);box-shadow:0 8px 24px rgba(191,23,54,.25)}
+.btn-blue{color:#fff;background:var(--blue3);box-shadow:0 8px 24px rgba(20,85,217,.3)}
+.btn-ghost{color:var(--blue);background:#fff;border:1.5px solid var(--line)}
+.reveal{opacity:0;transform:translateY(36px)}
+
+/* ===== nav ===== */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);transition:box-shadow .25s}
+.nav.scrolled{box-shadow:0 4px 24px rgba(14,39,115,.12)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;padding:16px 48px;max-width:1200px;margin:0 auto}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-text{font-family:'Montserrat';font-weight:700;font-size:16px;letter-spacing:1px;color:var(--blue)}
+.logo-text small{display:block;font-size:7.5px;letter-spacing:2.5px;color:var(--gray);font-weight:600}
+.nav-links{display:flex;gap:26px;font-size:14px;color:var(--gray)}
+.nav-links a{color:inherit;text-decoration:none}
+.nav-links a:hover{color:var(--blue)}
+.nav-cta{font-family:'Montserrat';font-weight:600;font-size:13px;color:#fff;background:var(--blue);border-radius:20px;padding:11px 22px;text-decoration:none;border:none;cursor:pointer}
+
+/* ===== HERO v3: текст слева, руки+телефон справа (по референсу) ===== */
+.hero{padding:150px 0 90px;background:linear-gradient(180deg,#fff 55%,var(--soft) 100%);overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:48px;align-items:center;text-align:left}
+.hero .kicker{color:var(--blue3)}
+.h1{font-family:'Montserrat';font-weight:900;font-size:56px;line-height:1.06;color:var(--blue);margin-bottom:22px;letter-spacing:-1px}
+.h1 em{font-style:normal;color:var(--blue3)}
+.hero-sub{font-size:17px;line-height:1.6;color:var(--gray);max-width:480px;margin-bottom:32px}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap}
+.hero-trust{display:flex;gap:24px;margin-top:30px;font-size:13px;color:var(--gray);flex-wrap:wrap}
+.hero-trust div{display:flex;gap:8px;align-items:center}
+.hero-trust i{font-style:normal;color:var(--blue3);font-weight:800}
+.hero-visual{position:relative;height:600px}
+.hero-hands{position:absolute;right:-10px;top:0;width:430px;filter:drop-shadow(0 30px 60px rgba(14,39,115,.35))}
+.hero-hands img{width:100%;display:block;border-radius:28px}
+.hero-chip{position:absolute;font-family:'Montserrat';font-weight:700;font-size:12px;background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 14px 34px rgba(14,39,115,.18);display:flex;align-items:center;gap:8px;z-index:3;will-change:transform}
+.hero-chip img{width:20px;height:20px;object-fit:contain}
+.hero-chip small{display:block;font-family:'Open Sans';font-weight:600;font-size:10px;color:var(--gray)}
+.hchip1{left:-16px;top:36px}.hchip2{left:-40px;top:180px}.hchip3{left:6px;top:330px}
+.hchip4{right:-6px;bottom:26px;background:var(--red);color:#fff}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.float{animation:floaty 4.5s ease-in-out infinite}
+.float.d2{animation-delay:-1.4s}.float.d3{animation-delay:-2.6s}.float.d4{animation-delay:-3.4s}
+
+/* terminal mini */
+.term{background:#fff;border:1px solid #E3E6F5;border-radius:14px;overflow:hidden;position:relative;cursor:pointer;text-align:left}
+.term-bar{background:var(--blue);padding:12px 18px;display:flex;gap:7px;align-items:center}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--blue2)}
+.dot:last-child{background:var(--red)}
+.term-title{margin-left:10px;font-family:'Montserrat';font-size:11px;letter-spacing:2px;color:#9FB3EC;text-transform:uppercase}
+.term-open{position:absolute;right:14px;bottom:14px;font-family:'Montserrat';font-size:11px;font-weight:700;color:#fff;background:var(--red);border-radius:20px;padding:7px 14px;box-shadow:0 6px 18px rgba(191,23,54,.35)}
+.term-body{padding:16px 20px}
+.trow{display:flex;align-items:center;justify-content:space-between;padding:11px 6px;border-bottom:1px solid #EEF1F9}
+.trow:last-child{border:none}
+.co{display:flex;align-items:center;gap:12px}
+.co-logo{width:36px;height:36px;border-radius:9px;background:var(--soft);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;border:1px solid var(--line)}
+.co-logo img{width:24px;height:24px;object-fit:contain}
+.co-name{font-family:'Montserrat';font-weight:700;font-size:14px}
+.co-sec{font-size:11px;color:var(--gray)}
+.price{text-align:right}
+.price b{font-family:'Montserrat';font-size:14px;color:var(--blue);display:block}
+.badge{display:inline-block;font-size:10px;font-weight:700;font-family:'Montserrat';color:var(--blue);background:var(--badge);border-radius:20px;padding:3px 10px;white-space:nowrap}
+.badge.hot{color:#fff;background:var(--red)}
+.badge.lim{color:#fff;background:var(--blue2)}
+.badge.live{color:#fff;background:var(--green)}
+
+/* ===== CINE: pinned кинематографичная сцена ===== */
+#cine{background:linear-gradient(180deg,var(--soft),#fff 30%);position:relative}
+.cine-stage{height:100vh;position:relative;display:flex;align-items:center;justify-content:center;perspective:1500px;overflow:hidden}
+.cine-cap{position:absolute;top:9vh;left:0;right:0;text-align:center;z-index:1;padding:0 24px}
+.cine-cap .kicker{margin-bottom:12px}
+.cine-cap h2{font-family:'Montserrat';font-weight:800;font-size:34px;color:var(--blue);line-height:1.15}
+.cine-term{position:absolute;width:min(880px,88vw);transform-style:preserve-3d;will-change:transform,opacity;box-shadow:0 60px 140px rgba(14,39,115,.28);border-radius:14px;opacity:0}
+.cine-term .term{box-shadow:none}
+.cine-cards{position:absolute;display:flex;gap:18px;justify-content:center;will-change:transform}
+.cine-card{width:204px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 18px;display:flex;flex-direction:column;gap:10px;box-shadow:0 24px 60px rgba(14,39,115,.14);will-change:transform,opacity;opacity:0}
+.cine-card .co-logo{width:44px;height:44px;border-radius:11px}
+.cine-card .co-logo img{width:28px;height:28px}
+.cc-top{display:flex;justify-content:space-between;align-items:flex-start}
+.cc-name{font-family:'Montserrat';font-weight:800;font-size:16px;color:var(--blue)}
+.cc-sec{font-size:10.5px;color:var(--gray);text-transform:uppercase;letter-spacing:.5px}
+.cc-why{font-size:11.5px;line-height:1.5;color:var(--gray);flex:1}
+.cc-meta{display:flex;gap:14px;border-top:1px solid var(--line);padding-top:10px}
+.cc-meta span{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--gray);display:block}
+.cc-meta b{font-family:'Montserrat';font-size:13px;color:var(--ink)}
+.cc-btn{font-family:'Montserrat';font-weight:700;font-size:12px;color:#fff;background:var(--blue3);border-radius:8px;padding:10px;text-align:center}
+
+/* ===== STRIP: компактный ряд карточек (референс-стиль) ===== */
+.strip-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin-top:48px;text-align:left}
+.strip-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px 20px;display:flex;flex-direction:column;gap:10px;cursor:pointer;transition:box-shadow .2s, transform .2s}
+.strip-card:hover{box-shadow:0 18px 48px rgba(14,39,115,.14);transform:translateY(-4px)}
+
+/* ===== MANIFEST: тёмная космическая секция ===== */
+.mani{position:relative;padding:0;min-height:100vh;display:flex;align-items:center;overflow:hidden;background:var(--dark)}
+.mani-bg{position:absolute;inset:-12% 0;background:url('assets/space-manifest.jpg') center/cover;will-change:transform}
+.mani-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,11,26,.88) 0%,rgba(7,11,26,.55) 45%,rgba(7,11,26,.15) 100%)}
+.mani-inner{position:relative;z-index:2;padding:120px 0;text-align:left}
+.mani .kicker{color:#7D9BFF}
+.mani h2{font-family:'Montserrat';font-weight:900;font-size:52px;line-height:1.1;color:#fff;max-width:640px;margin-bottom:20px}
+.mani h2 em{font-style:normal;color:#7D9BFF}
+.mani p{font-size:16px;line-height:1.7;color:#B9C6F0;max-width:480px;margin-bottom:48px}
+.mani-theses{display:flex;gap:36px;flex-wrap:wrap}
+.mani-thesis{max-width:280px}
+.mani-thesis b{font-family:'Montserrat';font-weight:700;font-size:15px;color:#fff;display:block;margin-bottom:8px}
+.mani-thesis span{font-size:13px;color:#8FA3E8;line-height:1.6}
+.mani-thesis .thesis-num{margin-bottom:12px}
+.thesis-num{font-family:'Montserrat';font-weight:900;font-size:14px;color:#fff;background:var(--red);width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+
+/* ===== sticky terminal ===== */
+.terminal-sec{background:var(--soft)}
+.sticky-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;margin-top:56px;align-items:start;text-align:left}
+.step{min-height:52vh;display:flex;flex-direction:column;justify-content:center;opacity:.25;transition:opacity .4s;padding:24px 0}
+.step.active{opacity:1}
+.step-num{font-family:'Montserrat';font-weight:800;font-size:13px;color:var(--red);letter-spacing:2px;margin-bottom:10px}
+.step-title{font-family:'Montserrat';font-weight:800;font-size:26px;color:var(--blue);margin-bottom:12px}
+.step-text{font-size:15px;line-height:1.65;color:var(--gray);max-width:420px}
+.sticky-mock{position:sticky;top:110px}
+.screen{min-height:400px;padding:26px;display:flex;flex-direction:column;gap:12px;justify-content:center}
+.screen h4{font-family:'Montserrat';font-weight:800;font-size:18px;color:var(--blue);margin-bottom:6px}
+.screen-line{background:var(--soft);border-radius:8px;padding:12px 16px;font-size:13px;color:var(--gray);display:flex;justify-content:space-between;align-items:center}
+.screen-line b{color:var(--ink);font-family:'Montserrat';font-size:13px}
+.screen .big-btn{background:var(--red);color:#fff;font-family:'Montserrat';font-weight:700;font-size:15px;border-radius:10px;padding:16px;text-align:center;margin-top:8px}
+.status-pill{font-family:'Montserrat';font-size:11px;font-weight:700;border-radius:20px;padding:4px 12px}
+.st-pending{background:#FFF3E0;color:#B26A00}.st-conf{background:var(--badge);color:var(--blue)}.st-done{background:#E3F7EC;color:#177245}
+.demo-btn{margin-top:22px;display:inline-block;font-family:'Montserrat';font-weight:700;font-size:14px;color:#fff;background:var(--blue);border-radius:30px;padding:15px 28px;border:none;cursor:pointer;box-shadow:0 10px 28px rgba(14,39,115,.3)}
+.demo-btn:hover{background:var(--blue2)}
+
+/* ===== TRI Fast/Transparent/Simple с мини-экранами ===== */
+.tri{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;text-align:left}
+.tri-item{border:1px solid var(--line);border-radius:16px;background:#fff;overflow:hidden;transition:box-shadow .2s, transform .2s}
+.tri-item:hover{box-shadow:0 18px 48px rgba(14,39,115,.12);transform:translateY(-3px)}
+.tri-body{padding:26px}
+.tri-ico{width:42px;height:42px;border-radius:11px;background:var(--badge);color:var(--blue);display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:16px}
+.tri-title{font-family:'Montserrat';font-weight:800;font-size:21px;color:var(--blue);margin-bottom:10px}
+.tri-text{font-size:14px;line-height:1.65;color:var(--gray)}
+.tri-mini{background:var(--soft);border-top:1px solid var(--line);padding:16px;display:flex;flex-direction:column;gap:8px}
+.tri-mini .screen-line{background:#fff;font-size:12px;padding:10px 14px}
+.tri-mini .screen-line b{font-size:12px}
+.mini-btn{background:var(--red);color:#fff;font-family:'Montserrat';font-weight:700;font-size:12px;border-radius:8px;padding:10px;text-align:center}
+.mini-btn.blue{background:var(--blue3)}
+
+/* ===== HSTEPS: 5 шагов горизонтально ===== */
+.hsteps{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;margin-top:56px;text-align:left}
+.hstep{position:relative;padding-top:8px}
+.hstep-line{height:2px;background:var(--line);margin:17px 0;position:relative}
+.hstep-dot{position:absolute;top:-17px;left:0;width:36px;height:36px;border-radius:50%;background:var(--blue3);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Montserrat';font-weight:800;font-size:14px;box-shadow:0 8px 20px rgba(20,85,217,.35)}
+.hstep:last-child .hstep-dot{background:var(--red);box-shadow:0 8px 20px rgba(191,23,54,.35)}
+.hstep b{font-family:'Montserrat';font-weight:700;font-size:15px;color:var(--blue);display:block;margin-bottom:8px}
+.hstep span{font-size:12.5px;color:var(--gray);line-height:1.55}
+
+/* ===== BENTO ===== */
+.bento{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:200px;gap:20px;margin-top:48px;text-align:left}
+.bento-cell{background:#fff;border:1px solid var(--line);border-radius:18px;padding:28px;position:relative;overflow:hidden;transition:box-shadow .2s, transform .2s;cursor:pointer}
+.bento-cell:hover{box-shadow:0 18px 48px rgba(14,39,115,.12);transform:translateY(-3px)}
+.bento-big{grid-column:span 2;grid-row:span 2;background:linear-gradient(150deg,var(--blue),var(--blue2) 70%,var(--blue3));color:#fff;display:flex;flex-direction:column;justify-content:flex-end}
+.bento-big h3{font-weight:800;font-size:30px;color:#fff;margin-bottom:10px}
+.bento-big p{color:#B9C6F0;font-size:15px;line-height:1.6;max-width:420px;margin-bottom:20px}
+.bento-cell h4{font-family:'Montserrat';font-weight:800;font-size:18px;color:var(--blue);margin-bottom:8px}
+.bento-cell p{font-size:13.5px;line-height:1.55;color:var(--gray)}
+.bento-num{font-family:'Montserrat';font-weight:900;font-size:40px;color:var(--badge);position:absolute;top:18px;right:24px}
+.bento-big .bento-num{color:rgba(255,255,255,.25)}
+.bento-ico{width:44px;height:44px;border-radius:12px;background:var(--badge);color:var(--blue);font-family:'Montserrat';font-weight:800;display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:17px}
+
+/* ===== ДО/ПОСЛЕ slider ===== */
+.ba-wrap{margin-top:48px}
+.ba{position:relative;height:400px;border-radius:20px;overflow:hidden;border:1px solid var(--line);user-select:none}
+.ba-side{position:absolute;inset:0;padding:44px}
+.ba-before{background:#EFEFF4;color:var(--gray)}
+.ba-after{background:linear-gradient(150deg,var(--blue),var(--blue3));color:#fff;clip-path:inset(0 0 0 50%)}
+.ba-side h3{font-weight:800;font-size:26px;margin-bottom:22px}
+.ba-before h3{color:var(--gray)}
+.ba-list{display:flex;flex-direction:column;gap:12px;font-size:15px;line-height:1.4;max-width:380px}
+.ba-list div{display:flex;gap:10px;align-items:flex-start}
+.ba-handle{position:absolute;top:0;bottom:0;left:50%;width:3px;background:#fff;cursor:ew-resize;z-index:5;box-shadow:0 0 20px rgba(0,0,0,.2)}
+.ba-knob{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%;background:#fff;box-shadow:0 10px 30px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--blue);z-index:6;cursor:ew-resize;font-weight:800;font-family:'Montserrat'}
+.ba-tag{position:absolute;top:18px;font-family:'Montserrat';font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;border-radius:20px;z-index:4}
+.ba-tag.l{left:18px;background:#fff;color:var(--gray)}
+.ba-tag.r{right:18px;background:var(--red);color:#fff}
+
+/* ===== сравнительная таблица ===== */
+.cmp{margin-top:48px;border:1px solid var(--line);border-radius:18px;overflow:hidden;text-align:left}
+.cmp-row{display:grid;grid-template-columns:1.2fr 1fr 1fr;border-bottom:1px solid var(--line)}
+.cmp-row:last-child{border:none}
+.cmp-row>div{padding:20px 26px;font-size:14.5px;line-height:1.5}
+.cmp-row .f{font-family:'Montserrat';font-weight:700;color:var(--ink);background:var(--soft)}
+.cmp-row .old{color:var(--gray)}
+.cmp-row .new{color:var(--blue);font-weight:600;border-left:3px solid var(--red)}
+.cmp-head{background:var(--blue);color:#fff}
+.cmp-head>div{font-family:'Montserrat';font-weight:800;font-size:15px;color:#fff}
+.cmp-head .f{background:transparent;color:#B9C6F0}
+
+/* ===== band + marquee ===== */
+.band{background:var(--blue);color:#fff;padding:88px 0;overflow:hidden}
+.band-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center;margin-bottom:44px;text-align:left}
+.band h2{font-weight:800;font-size:40px;line-height:1.15;color:#fff;margin-bottom:16px}
+.band p{color:#B9C6F0;font-size:16px;line-height:1.65}
+.marquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.marquee+.marquee{margin-top:14px}
+.marquee-track{display:flex;gap:14px;width:max-content;animation:scrollX 34s linear infinite}
+.marquee.rev .marquee-track{animation-direction:reverse}
+.marquee:hover .marquee-track{animation-play-state:paused}
+@keyframes scrollX{to{transform:translateX(-50%)}}
+.mq-tile{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:14px 22px;font-family:'Montserrat';font-weight:700;font-size:14px;color:#fff;white-space:nowrap}
+.mq-tile img{width:24px;height:24px;object-fit:contain;border-radius:6px;background:#fff;padding:2px}
+.mq-tile span{color:#8FA3E8;font-weight:600;font-size:12px}
+.band-stats{display:flex;gap:16px;flex-wrap:wrap}
+.band-stat{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:18px 24px}
+.band-stat b{font-family:'Montserrat';font-weight:800;font-size:28px;display:block}
+.band-stat span{font-size:12px;color:#B9C6F0}
+
+/* ===== кейсы ===== */
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;text-align:left}
+.case{border:1px solid var(--line);border-radius:18px;padding:30px;background:#fff;position:relative;transition:box-shadow .2s, transform .2s}
+.case:hover{box-shadow:0 18px 48px rgba(14,39,115,.12);transform:translateY(-3px)}
+.case-sector{font-family:'Montserrat';font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:14px}
+.case-name{font-family:'Montserrat';font-weight:800;font-size:21px;color:var(--blue);margin-bottom:18px}
+.case-stats{display:flex;gap:20px;margin-bottom:16px}
+.case-stats b{font-family:'Montserrat';font-weight:900;font-size:26px;color:var(--blue3);display:block}
+.case-stats span{font-size:11px;color:var(--gray)}
+.case-quote{font-size:13.5px;line-height:1.6;color:var(--gray);border-top:1px solid var(--line);padding-top:14px}
+.case-note{font-size:11px;color:var(--gray);margin-top:20px;font-style:italic}
+
+/* ===== live/soon ===== */
+.ls{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:48px;text-align:left}
+.ls-col{border-radius:18px;padding:30px;border:1px solid var(--line)}
+.ls-col.live{background:#fff;border-top:4px solid var(--green)}
+.ls-col.soon{background:var(--soft);border-top:4px solid var(--blue3)}
+.ls-col h3{font-weight:800;font-size:20px;color:var(--blue);margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.ls-dot{width:10px;height:10px;border-radius:50%}
+.ls-dot.g{background:var(--green)}.ls-dot.b{background:var(--blue3)}
+.ls-row{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px}
+.ls-row:last-child{border:none}
+.ls-row b{font-family:'Montserrat';color:var(--ink)}
+.ls-row span{color:var(--gray);font-size:12.5px}
+
+/* ===== trust ===== */
+.trust{background:var(--soft)}
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:48px;text-align:left}
+.trust-item{background:#fff;border:1px solid var(--line);border-radius:12px;padding:24px}
+.trust-ico{width:40px;height:40px;border-radius:10px;background:var(--badge);color:var(--blue);font-family:'Montserrat';font-weight:800;display:flex;align-items:center;justify-content:center;margin-bottom:14px;font-size:15px}
+.trust-item b{font-family:'Montserrat';font-weight:700;font-size:14.5px;color:var(--blue);display:block;margin-bottom:8px}
+.trust-item span{font-size:12.5px;color:var(--gray);line-height:1.55}
+
+/* ===== video ===== */
+.videos{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;text-align:left}
+.video{border-radius:14px;overflow:hidden;background:#fff;border:1px solid var(--line)}
+.video-thumb{height:180px;background:linear-gradient(135deg,var(--blue),var(--blue2));display:flex;align-items:center;justify-content:center;position:relative}
+.play{width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.95);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .2s}
+.play:hover{transform:scale(1.08)}
+.play::after{content:'';border-left:16px solid var(--red);border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px}
+.video-body{padding:20px}
+.video-body b{font-family:'Montserrat';font-weight:700;font-size:15px;color:var(--blue);display:block;margin-bottom:6px}
+.video-body span{font-size:13px;color:var(--gray);line-height:1.5}
+.video-tag{position:absolute;top:14px;left:14px;font-family:'Montserrat';font-size:10px;font-weight:700;letter-spacing:1.5px;color:#fff;background:rgba(191,23,54,.9);border-radius:20px;padding:4px 12px;text-transform:uppercase}
+
+/* ===== faq ===== */
+.faq-list{margin-top:40px;border-top:1px solid var(--line);text-align:left}
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-q{width:100%;background:none;border:none;text-align:left;font-family:'Montserrat';font-weight:700;font-size:17px;color:var(--blue);padding:24px 48px 24px 0;cursor:pointer;position:relative}
+.faq-q::after{content:'+';position:absolute;right:8px;top:50%;transform:translateY(-50%);font-size:26px;font-weight:400;color:var(--red);transition:transform .25s}
+.faq-item.open .faq-q::after{transform:translateY(-50%) rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease;font-size:15px;line-height:1.7;color:var(--gray)}
+.faq-a p{padding:0 0 24px;max-width:760px}
+
+/* ===== final: горы + форма ===== */
+.final{position:relative;color:#fff;padding:120px 0;overflow:hidden;background:var(--dark)}
+.final-bg{position:absolute;inset:0;background:url('assets/mountains-cta.jpg') center/cover;will-change:transform}
+.final-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,11,26,.85) 0%,rgba(7,11,26,.45) 60%,rgba(7,11,26,.35) 100%)}
+.final-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center;text-align:left}
+.final h2{font-weight:800;font-size:42px;line-height:1.15;color:#fff;margin-bottom:18px}
+.final p{color:#B9C6F0;font-size:16px;line-height:1.65;margin-bottom:28px;max-width:460px}
+.final-links{display:flex;flex-direction:column;gap:12px}
+.final-links a{color:#fff;font-family:'Montserrat';font-weight:600;font-size:14px;text-decoration:none;display:flex;align-items:center;gap:10px}
+.final-links a::before{content:'→';color:#FF8095}
+.form{background:#fff;border-radius:16px;padding:36px;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.form h3{font-weight:800;font-size:22px;color:var(--blue);margin-bottom:8px}
+.form>p{font-size:13px;color:var(--gray);margin-bottom:22px}
+.field{margin-bottom:14px}
+.field label{display:block;font-family:'Montserrat';font-weight:600;font-size:12px;color:var(--blue);margin-bottom:6px}
+.field input{width:100%;border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-family:'Open Sans';font-size:15px;color:var(--ink);outline:none;transition:border-color .2s}
+.field input:focus{border-color:var(--blue3)}
+.form .btn-red{width:100%;text-align:center;margin-top:8px;border-radius:10px}
+.form-note{font-size:11px;color:var(--gray);margin-top:14px;line-height:1.5}
+.form-ok{display:none;text-align:center;padding:40px 0}
+.form-ok b{font-family:'Montserrat';font-size:20px;color:var(--blue);display:block;margin-bottom:8px}
+.form-ok span{font-size:14px;color:var(--gray)}
+
+/* ===== footer ===== */
+footer{background:var(--ink);color:#8b8b86;padding:56px 0 32px;text-align:left}
+.foot-grid{display:flex;justify-content:space-between;gap:48px;flex-wrap:wrap;margin-bottom:40px}
+.foot-logo{font-family:'Montserrat';font-weight:700;font-size:15px;color:#fff;letter-spacing:1px;margin-bottom:6px}
+.foot-logo small{display:block;font-size:7px;letter-spacing:2.5px;color:#8b8b86}
+.foot-col span{display:block;font-family:'Montserrat';font-weight:700;font-size:12px;color:#fff;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px}
+.foot-col a{display:block;color:#8b8b86;font-size:13px;text-decoration:none;margin-bottom:8px}
+.disclaimer{border-top:1px solid #33332f;padding-top:24px;font-size:11px;line-height:1.6;color:#6a6a64}
+
+/* ===== модалки ===== */
+.overlay{position:fixed;inset:0;z-index:200;background:rgba(7,11,26,.7);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:24px}
+.overlay.show{display:flex}
+.modal{border-radius:20px;max-width:860px;width:100%;max-height:88vh;overflow-y:auto;position:relative;transform:scale(.94);opacity:0;transition:transform .3s cubic-bezier(.2,.9,.3,1.2), opacity .25s}
+.overlay.show .modal{transform:scale(1);opacity:1}
+.modal-close{position:absolute;top:18px;right:18px;width:38px;height:38px;border-radius:50%;border:none;background:rgba(255,255,255,.12);color:#fff;font-size:18px;cursor:pointer;z-index:5}
+.modal-close:hover{background:rgba(255,255,255,.25)}
+.co-modal{background:linear-gradient(160deg,#0A1130,#101B45);color:#fff;padding:44px;text-align:left}
+.cm-head{display:flex;align-items:center;gap:18px;margin-bottom:8px}
+.cm-logo{width:64px;height:64px;border-radius:16px;background:#fff;display:flex;align-items:center;justify-content:center;padding:10px}
+.cm-logo img{width:100%;height:100%;object-fit:contain}
+.cm-name{font-family:'Montserrat';font-weight:900;font-size:30px}
+.cm-sec{color:#8FA3E8;font-size:13px}
+.cm-tag{display:inline-block;font-family:'Montserrat';font-size:10px;font-weight:700;letter-spacing:1.5px;color:#6EE7FF;border:1px solid rgba(110,231,255,.35);border-radius:20px;padding:4px 12px;text-transform:uppercase;margin-bottom:18px}
+.cm-desc{font-size:14.5px;line-height:1.7;color:#C6D2F5;margin-bottom:26px;max-width:640px}
+.cm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:26px}
+.cm-cell{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:16px}
+.cm-cell span{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#8FA3E8;display:block;margin-bottom:6px}
+.cm-cell b{font-family:'Montserrat';font-size:19px;color:#fff}
+.cm-facts{display:flex;flex-direction:column;gap:10px;margin-bottom:30px}
+.cm-fact{display:flex;gap:12px;font-size:13.5px;color:#C6D2F5;line-height:1.5;align-items:flex-start}
+.cm-fact::before{content:'★';color:var(--red);font-size:12px;margin-top:2px}
+.cm-cta{display:flex;gap:14px;flex-wrap:wrap}
+.cm-cta .btn-red{box-shadow:0 10px 30px rgba(191,23,54,.4);border-radius:30px}
+.cm-cta .btn-ghostw{color:#fff;background:transparent;border:1px solid rgba(255,255,255,.3);border-radius:30px;font-family:'Montserrat';font-weight:700;font-size:15px;padding:16px 28px;cursor:pointer}
+.cm-disc{font-size:10.5px;color:#5E74C9;margin-top:22px;line-height:1.5}
+.t-modal{background:var(--dark);max-width:1100px;color:#EAEFFD;overflow:hidden;border:1px solid #1c2a5e;text-align:left}
+.tm-top{display:flex;align-items:center;gap:16px;background:var(--dark2);padding:12px 20px;border-bottom:1px solid #1c2a5e}
+.tm-logo{font-family:'Montserrat';font-weight:800;font-size:13px;letter-spacing:1px;color:#fff}
+.tm-logo small{color:#5E74C9;font-weight:600}
+.tm-tabs{display:flex;gap:6px;margin-left:12px}
+.tm-tab{font-family:'Montserrat';font-size:11px;font-weight:700;color:#8FA3E8;padding:7px 14px;border-radius:8px;cursor:pointer;border:none;background:transparent}
+.tm-tab.active{background:var(--blue3);color:#fff}
+.tm-bal{margin-left:auto;text-align:right;padding-right:46px}
+.tm-bal span{font-size:10px;color:#5E74C9;display:block}
+.tm-bal b{font-family:'Montserrat';font-size:15px;color:#fff}
+.tm-body{display:grid;grid-template-columns:1fr 240px;min-height:430px}
+.tm-chart{padding:18px;position:relative}
+.tm-chart-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.tm-chart-head b{font-family:'Montserrat';font-size:16px;color:#fff}
+.chg{font-size:12px;font-weight:700}
+.chg.up{color:var(--up)}.chg.dn{color:#FF5C7A}
+#candleCanvas{width:100%;height:340px;display:block}
+.tm-side{border-left:1px solid #1c2a5e;padding:14px;display:flex;flex-direction:column}
+.tm-side h5{font-family:'Montserrat';font-size:10px;letter-spacing:2px;color:#5E74C9;text-transform:uppercase;margin-bottom:10px}
+.wl-row{display:flex;justify-content:space-between;align-items:center;padding:8px 6px;border-radius:8px;font-size:12px;cursor:pointer}
+.wl-row:hover{background:rgba(255,255,255,.05)}
+.wl-row b{font-family:'Montserrat';color:#fff;font-size:12px}
+.wl-row .p{text-align:right}
+.wl-row .p b{display:block}
+.tm-order{margin-top:auto;padding-top:14px;border-top:1px solid #1c2a5e}
+.tm-order .row2{display:flex;gap:8px;margin-bottom:10px}
+.btn-buy,.btn-sell{flex:1;font-family:'Montserrat';font-weight:800;font-size:13px;padding:12px;border:none;border-radius:8px;cursor:pointer;color:#fff}
+.btn-buy{background:var(--green)}.btn-sell{background:var(--red)}
+.tm-order .meta{font-size:11px;color:#5E74C9;display:flex;justify-content:space-between;margin-bottom:6px}
+.tm-order .meta b{color:#EAEFFD}
+.tm-preipo{position:absolute;inset:58px 240px 0 0;background:var(--dark);padding:22px;display:none;overflow-y:auto}
+.tm-preipo.show{display:block}
+.tm-preipo h4{font-family:'Montserrat';font-size:16px;margin-bottom:14px;color:#fff}
+.pi-row{display:flex;align-items:center;justify-content:space-between;background:var(--dark2);border:1px solid #1c2a5e;border-radius:12px;padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:border-color .2s}
+.pi-row:hover{border-color:var(--blue3)}
+.pi-co{display:flex;align-items:center;gap:12px}
+.pi-co .co-logo{background:#fff;border:none}
+.pi-co b{font-family:'Montserrat';font-size:14px;color:#fff;display:block}
+.pi-co span{font-size:11px;color:#5E74C9}
+.pi-right{display:flex;align-items:center;gap:16px}
+.pi-right b{font-family:'Montserrat';font-size:14px;color:#fff}
+.pi-btn{font-family:'Montserrat';font-size:11px;font-weight:700;color:#fff;background:var(--red);border:none;border-radius:8px;padding:9px 16px;cursor:pointer}
+
+@media (max-width:1000px){
+  .hero-grid,.sticky-grid,.band-grid,.final-grid,.ls{grid-template-columns:1fr}
+  .tri,.videos,.cases{grid-template-columns:1fr}
+  .strip-grid{grid-template-columns:repeat(2,1fr)}
+  .trust-grid,.cm-grid{grid-template-columns:repeat(2,1fr)}
+  .hsteps{grid-template-columns:1fr;gap:32px}
+  .bento{grid-template-columns:1fr;grid-auto-rows:auto}
+  .bento-big{grid-column:span 1;grid-row:span 1}
+  .nav-links{display:none}
+  .h1{font-size:38px}.h2,.band h2,.final h2{font-size:30px}.mani h2{font-size:32px}
+  .sticky-mock{position:static}.step{min-height:auto;opacity:1}
+  .wrap{padding:0 24px}section{padding:64px 0}
+  .hero-visual{height:auto}.hero-hands{position:static;width:100%;max-width:420px;margin:0 auto}
+  .hero-chip{display:none}
+  #cine{display:none}
+  .tm-body{grid-template-columns:1fr}.tm-preipo{inset:58px 0 0 0}
+  .cmp-row{grid-template-columns:1fr}
+  .ba{height:520px}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav" id="nav">
+  <div class="nav-in">
+    <div class="logo">
+      <svg width="32" height="32" viewBox="0 0 34 34"><polygon points="2,30 14,18 4,16 20,10 16,26 22,20 30,32" fill="#0E2773" transform="scale(1.05)"/></svg>
+      <div class="logo-text">PARTNER FINANCE<small>PROSPERITY IN PARTNERSHIP</small></div>
+    </div>
+    <div class="nav-links">
+      <a href="#companies">Компании</a><a href="#terminal">Терминал</a><a href="#how">Как это работает</a><a href="#trust">Лицензии</a><a href="#faq">FAQ</a>
+    </div>
+    <a class="nav-cta" href="#access">Запросить доступ</a>
+  </div>
+</nav>
+
+<!-- ============ 1. HERO (референс: текст слева, руки+телефон справа) ============ -->
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="kicker reveal">Pre-IPO инвестиции для тех, кто думает на год вперёд</div>
+      <h1 class="h1 reveal">Инвестируйте в лидеров завтрашнего дня — <em>раньше рынка !!!.</em></h1>
+      <p class="hero-sub reveal">Покупайте акции самых перспективных частных компаний мира до их выхода на биржу — и скоро торгуйте ими в терминале Partner Finance.</p>
+      <div class="cta-row reveal">
+        <a class="btn btn-red" href="#companies">Смотреть доступные компании</a>
+        <button class="btn btn-ghost" onclick="openTerminal()">▶ Демо терминала</button>
+      </div>
+      <div class="hero-trust reveal">
+        <div><i>§</i> Регулируемая структура</div>
+        <div><i>⛨</i> Институциональная безопасность</div>
+        <div><i>◎</i> Глобальный доступ</div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-hands"><img src="assets/hands-terminal.png" alt="Терминал Partner Finance в руках"></div>
+      <div class="hero-chip hchip1 float"><img src="assets/polymarket.png" alt="">Polymarket<small>$170 / share</small></div>
+      <div class="hero-chip hchip2 float d2"><img src="assets/apptronik.png" alt="">Apptronik<small>$45 / share</small></div>
+      <div class="hero-chip hchip3 float d3"><img src="assets/perplexity.png" alt="">Perplexity<small>$92.40 / share</small></div>
+      <div class="hero-chip hchip4 float d4">200+ IPO за год</div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ 2. CINE: pinned сцена — терминал разворачивается, уходит, появляются карточки ============ -->
+<section id="cine" style="padding:0">
+  <div class="cine-stage" id="cineStage">
+    <div class="cine-cap" id="cineCap">
+      <div class="kicker">Терминал Partner Finance</div>
+      <h2 id="cineCapText">Полный цикл инвестиций.<br>От Pre-IPO — к вторичной торговле.</h2>
+    </div>
+    <div class="cine-term" id="cineTerm">
+      <div class="term" onclick="openTerminal()">
+        <div class="term-bar"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span class="term-title">Partner Finance Terminal — Pre-IPO</span></div>
+        <div class="term-body" id="cineRows"></div>
+        <span class="term-open">▶ Демо</span>
+      </div>
+    </div>
+    <div class="cine-cards" id="cineCards"></div>
+  </div>
+</section>
+
+<!-- ============ 3. STRIP: компактные карточки (референс-стиль) ============ -->
+<section id="companies">
+  <div class="wrap" style="text-align:center">
+    <div class="kicker reveal">5 эксклюзивных компаний · доступно сейчас</div>
+    <h2 class="h2 reveal">Инвестируйте в 5 перспективных компаний уже сегодня</h2>
+    <p class="lead reveal" style="margin:0 auto">Минимальный порог входа — $5 000. Нажмите на карточку, чтобы открыть инвестиционный профиль.</p>
+    <div class="strip-grid" id="strip"></div>
+  </div>
+</section>
+
+<!-- ============ 4. MANIFEST: тёмная космическая секция ============ -->
+<section class="mani">
+  <div class="mani-bg" id="maniBg"></div>
+  <div class="mani-shade"></div>
+  <div class="wrap mani-inner">
+    <div class="kicker reveal">Новое поколение глобальных компаний</div>
+    <h2 class="reveal">Инвестируйте рано — в компании, которые <em>определят следующее десятилетие.</em></h2>
+    <p class="reveal">От прорывных технологий до глобальных маркетплейсов: Partner Finance даёт доступ к будущим лидерам категорий — до того, как они выйдут на публичный рынок.</p>
+    <div class="mani-theses">
+      <div class="mani-thesis reveal"><div class="thesis-num">1</div><b>Доступ к компаниям будущего</b><span>Лидеры следующего десятилетия формируются сейчас — в частном контуре, до биржи.</span></div>
+      <div class="mani-thesis reveal"><div class="thesis-num">2</div><b>Вход раньше широкой публики</b><span>Цена и условия формируются до того, как спрос становится массовым.</span></div>
+      <div class="mani-thesis reveal"><div class="thesis-num">3</div><b>Ликвидность нового поколения</b><span>Инфраструктура вторичных сделок делает private markets доступнее, чем когда-либо.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. ТЕРМИНАЛ: sticky шаги 1–6 ============ -->
+<section class="terminal-sec" id="terminal">
+  <div class="wrap">
+    <div class="kicker reveal">Терминал Partner Finance</div>
+    <h2 class="h2 reveal">Полный инвестиционный опыт.<br>От Pre-IPO — к вторичной торговле.</h2>
+    <p class="lead reveal">Покупайте эксклюзивные Pre-IPO сделки сейчас — и скоро торгуйте ими в терминале Partner Finance.</p>
+    <button class="demo-btn reveal" onclick="openTerminal()">▶ Открыть интерактивную презентацию терминала</button>
+    <div class="sticky-grid">
+      <div class="steps">
+        <div class="step" data-screen="0"><div class="step-num">ШАГ 01</div><div class="step-title">Выбор компании</div><p class="step-text">Изучите эксклюзивные Pre-IPO возможности: сектор, тезис, ключевые метрики.</p></div>
+        <div class="step" data-screen="1"><div class="step-num">ШАГ 02</div><div class="step-title">Просмотр условий</div><p class="step-text">Цена, оценка, минимум $5 000 и ключевые документы — до принятия решения.</p></div>
+        <div class="step" data-screen="2"><div class="step-num">ШАГ 03</div><div class="step-title">Размещение заявки</div><p class="step-text">Одна clean-кнопка. Инвестируйте за минуты — безопасно и прозрачно.</p></div>
+        <div class="step" data-screen="3"><div class="step-num">ШАГ 04</div><div class="step-title">Статус исполнения</div><p class="step-text">Pending → Confirmed → Completed. Обновления в реальном времени на каждом этапе.</p></div>
+        <div class="step" data-screen="4"><div class="step-num">ШАГ 05</div><div class="step-title">Уведомления</div><p class="step-text">Order received, allocation updated, deal confirmed — каждое событие приходит мгновенно.</p></div>
+        <div class="step" data-screen="5"><div class="step-num">ШАГ 06</div><div class="step-title">Ваша позиция</div><p class="step-text">Отслеживайте результат в портфеле: стоимость, статус и динамика — в одном месте.</p></div>
+      </div>
+      <div class="sticky-mock">
+        <div class="term" style="cursor:default" onclick="event.stopPropagation()">
+          <div class="term-bar"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span class="term-title" id="screenTitle">Terminal — Шаг 01 / 06</span></div>
+          <div class="screen" id="screen"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. TRI: Fast / Transparent / Simple ============ -->
+<section>
+  <div class="wrap" style="text-align:center">
+    <div class="kicker reveal">Принципы продукта</div>
+    <h2 class="h2 reveal">Быстро. Прозрачно. Просто.</h2>
+    <div class="tri">
+      <div class="tri-item reveal">
+        <div class="tri-body"><div class="tri-ico">⚡</div><div class="tri-title">Быстро</div><p class="tri-text">Инвестируйте за минуты, а не месяцы. Отлаженный процесс — от старта до завершения сделки.</p></div>
+        <div class="tri-mini">
+          <div class="screen-line"><span>Разместить заявку</span><b>$5 000</b></div>
+          <div class="mini-btn">Инвестировать →</div>
+        </div>
+      </div>
+      <div class="tri-item reveal">
+        <div class="tri-body"><div class="tri-ico">◎</div><div class="tri-title">Прозрачно</div><p class="tri-text">Понятные условия, обновления в реальном времени и полная видимость ваших инвестиций.</p></div>
+        <div class="tri-mini">
+          <div class="screen-line"><span>Цена за акцию</span><b>$170.00</b></div>
+          <div class="screen-line"><span>Минимум</span><b>$5 000</b></div>
+          <div class="screen-line"><span>Комиссия</span><b>до сделки</b></div>
+        </div>
+      </div>
+      <div class="tri-item reveal">
+        <div class="tri-body"><div class="tri-ico">✓</div><div class="tri-title">Просто</div><p class="tri-text">Современный интуитивный интерфейс, созданный для частных инвесторов.</p></div>
+        <div class="tri-mini">
+          <div class="screen-line"><b>① Выберите</b><span>→</span></div>
+          <div class="screen-line"><b>② Инвестируйте</b><span>→</span></div>
+          <div class="screen-line"><b>③ Отслеживайте</b><span>→</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7. BENTO ============ -->
+<section id="how" style="padding-top:0">
+  <div class="wrap">
+    <div class="kicker reveal">Экосистема</div>
+    <h2 class="h2 reveal">Создано для полного инвестиционного цикла</h2>
+    <div class="bento">
+      <div class="bento-cell bento-big reveal" onclick="openTerminal()">
+        <div class="bento-num">01</div>
+        <h3>Терминал Partner Finance</h3>
+        <p>Выбор компании, условия, заявка, статус исполнения, уведомления и портфель — единый контур без посредников. Нажмите, чтобы открыть интерактивную презентацию.</p>
+        <span class="btn btn-red" style="align-self:flex-start">▶ Смотреть презентацию</span>
+      </div>
+      <div class="bento-cell reveal"><div class="bento-num">02</div><div class="bento-ico">⚡</div><h4>Быстрый онбординг</h4><p>Аккаунт, KYC и подключение — один последовательный процесс в приложении.</p></div>
+      <div class="bento-cell reveal"><div class="bento-num">03</div><div class="bento-ico">◎</div><h4>Прозрачные условия</h4><p>Цена, минимум $5 000 и комиссия видны до сделки. Без скрытых пунктов.</p></div>
+      <div class="bento-cell reveal"><div class="bento-num">04</div><div class="bento-ico">⛨</div><h4>Многоуровневый контроль</h4><p>Банк отправителя → платёжная инфраструктура → банк в KZ → KYC/AML Partner Finance.</p></div>
+      <div class="bento-cell reveal"><div class="bento-num">05</div><div class="bento-ico">✆</div><h4>Поддержка 24/7</h4><p>Персональный менеджер на всех этапах — от первой заявки до портфеля.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8. ДО / ПОСЛЕ slider ============ -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="kicker reveal">До / После</div>
+    <h2 class="h2 reveal">Как меняется доступ к Pre-IPO</h2>
+    <p class="lead reveal">Потяните ползунок и сравните: классический путь инвестора и путь через Partner Finance.</p>
+    <div class="ba-wrap reveal">
+      <div class="ba" id="ba">
+        <div class="ba-side ba-before">
+          <span class="ba-tag l">Раньше</span>
+          <h3>Классический путь</h3>
+          <div class="ba-list">
+            <div>✕ &nbsp;Pre-IPO — только для фондов и UHNW-клиентов</div>
+            <div>✕ &nbsp;Пороги входа от $100 000+</div>
+            <div>✕ &nbsp;Непрозрачные условия и скрытые комиссии</div>
+            <div>✕ &nbsp;Недели на документы и согласования</div>
+          </div>
+        </div>
+        <div class="ba-side ba-after" id="baAfter">
+          <span class="ba-tag r">С Partner Finance</span>
+          <h3 style="color:#fff">Через нашу экосистему</h3>
+          <div class="ba-list">
+            <div>✓ &nbsp;Прямой доступ к частным компаниям</div>
+            <div>✓ &nbsp;Минимум $5 000 по каждой сделке</div>
+            <div>✓ &nbsp;Все условия — до подтверждения заявки</div>
+            <div>✓ &nbsp;Онбординг и первая сделка — в один день</div>
+          </div>
+        </div>
+        <div class="ba-handle" id="baHandle"></div>
+        <div class="ba-knob" id="baKnob">⇔</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 9. СРАВНЕНИЕ ============ -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="kicker reveal">Полное сравнение</div>
+    <h2 class="h2 reveal">Традиционный доступ vs Partner Finance</h2>
+    <div class="cmp reveal">
+      <div class="cmp-row cmp-head"><div class="f">Критерий</div><div>Традиционные каналы</div><div>Partner Finance Pre-IPO</div></div>
+      <div class="cmp-row"><div class="f">Порог входа</div><div class="old">Высокий, индивидуальные условия для крупных клиентов</div><div class="new">Минимум $5 000 по каждой компании</div></div>
+      <div class="cmp-row"><div class="f">Скорость сделки</div><div class="old">Дни–недели согласований</div><div class="new">Заявка в терминале за минуты</div></div>
+      <div class="cmp-row"><div class="f">Прозрачность</div><div class="old">Условия «по запросу», скрытые комиссии</div><div class="new">Цена, объём и комиссия — до сделки</div></div>
+      <div class="cmp-row"><div class="f">Контроль исполнения</div><div class="old">Звонки менеджеру</div><div class="new">Статусы Pending → Confirmed → Completed в терминале</div></div>
+      <div class="cmp-row"><div class="f">Портфель</div><div class="old">Отчёты раз в месяц</div><div class="new">Holdings и стоимость позиций в реальном времени</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 10. 200+ IPO + двойной marquee ============ -->
+<section class="band">
+  <div class="wrap">
+    <div class="band-grid">
+      <div class="reveal">
+        <h2>Более 200 компаний вышли на IPO в прошлом году</h2>
+        <p>Все они были доступны на стадии Pre-IPO. Инвесторы, вошедшие раньше листинга, получили доступ к росту, которого уже не было на публичном рынке.</p>
+      </div>
+      <div class="band-stats reveal">
+        <div class="band-stat"><b>200+</b><span>IPO за год</span></div>
+        <div class="band-stat"><b>5</b><span>компаний доступно сейчас</span></div>
+        <div class="band-stat"><b>$5 000</b><span>минимальный вход</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="marquee reveal"><div class="marquee-track" id="mqTrack1"></div></div>
+  <div class="marquee rev reveal"><div class="marquee-track" id="mqTrack2"></div></div>
+</section>
+
+<!-- ============ 11. HSTEPS: от доступа к владению за 5 шагов ============ -->
+<section>
+  <div class="wrap">
+    <div class="kicker reveal">Как это работает</div>
+    <h2 class="h2 reveal">От доступа к владению — за 5 простых шагов</h2>
+    <div class="hsteps">
+      <div class="hstep reveal"><div class="hstep-line"><div class="hstep-dot">1</div></div><b>Запросите доступ</b><span>Создайте аккаунт и пройдите верификацию.</span></div>
+      <div class="hstep reveal"><div class="hstep-line"><div class="hstep-dot">2</div></div><b>Получите одобрение</b><span>Мы рассмотрим заявку — обычно в течение 1–2 дней.</span></div>
+      <div class="hstep reveal"><div class="hstep-line"><div class="hstep-dot">3</div></div><b>Изучите сделки</b><span>Доступные Pre-IPO возможности — в терминале.</span></div>
+      <div class="hstep reveal"><div class="hstep-line"><div class="hstep-dot">4</div></div><b>Инвестируйте</b><span>Разместите заявку безопасно — от $5 000.</span></div>
+      <div class="hstep reveal"><div class="hstep-line"><div class="hstep-dot">5</div></div><b>Отслеживайте и растите</b><span>Следите за позициями; торговля в терминале — скоро.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 12. КЕЙСЫ ============ -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="kicker reveal">Иллюстративные сценарии</div>
+    <h2 class="h2 reveal">Что даёт вход до листинга</h2>
+    <div class="cases">
+      <div class="case reveal"><div class="case-sector">AI Infrastructure</div><div class="case-name">Вычисления для ИИ-гонки</div><div class="case-stats"><div><b>×2–4</b><span>диапазон роста оценок в секторе за 2024–25</span></div></div><p class="case-quote">Компании GPU-инфраструктуры переоценивались от раунда к раунду по мере роста спроса на вычисления.</p></div>
+      <div class="case reveal"><div class="case-sector">Fintech / Web3</div><div class="case-name">Новые финансовые рынки</div><div class="case-stats"><div><b>$15,5B</b><span>оценка лидера prediction markets</span></div></div><p class="case-quote">Категории, которых не существовало пять лет назад, стали миллиардными рынками ещё до IPO.</p></div>
+      <div class="case reveal"><div class="case-sector">Robotics</div><div class="case-name">Physical AI</div><div class="case-stats"><div><b>$40B</b><span>прогноз TAM humanoid robotics к 2030</span></div></div><p class="case-quote">Гуманоидная робототехника проходит путь от лабораторий до контрактов с Mercedes-Benz и Google.</p></div>
+    </div>
+    <p class="case-note reveal">* Иллюстрации по открытым рыночным данным и материалам презентаций Partner Finance. Не являются прогнозом доходности.</p>
+  </div>
+</section>
+
+<!-- ============ 13. LIVE / SOON ============ -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="kicker reveal">Roadmap продукта</div>
+    <h2 class="h2 reveal">Что уже работает — и что скоро</h2>
+    <div class="ls">
+      <div class="ls-col live reveal">
+        <h3><span class="ls-dot g"></span>Уже доступно</h3>
+        <div class="ls-row"><b>5 Pre-IPO компаний</b><span>Polymarket, Apptronik, Lambda, Perplexity, SambaNova</span></div>
+        <div class="ls-row"><b>Вход от $5 000</b><span>понятный минимум по каждой сделке</span></div>
+        <div class="ls-row"><b>Онбординг и KYC</b><span>в приложении</span></div>
+        <div class="ls-row"><b>Портфель и статусы</b><span>holdings в реальном времени</span></div>
+      </div>
+      <div class="ls-col soon reveal">
+        <h3><span class="ls-dot b"></span>Скоро</h3>
+        <div class="ls-row"><b>Прямая торговля Pre-IPO</b><span>в терминале Partner Finance</span></div>
+        <div class="ls-row"><b>Новые компании</b><span>ежемесячное обновление списка</span></div>
+        <div class="ls-row"><b>Уведомления об аллокациях</b><span>order / allocation / confirmed</span></div>
+        <div class="ls-row"><b>Ранний доступ</b><span>приоритет для клиентов из waitlist</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 14. TRUST ============ -->
+<section class="trust" id="trust">
+  <div class="wrap">
+    <div class="kicker reveal">Доверие и безопасность</div>
+    <h2 class="h2 reveal">Регулируемая и защищённая платформа,<br>которой можно доверять</h2>
+    <p class="lead reveal">Partner Finance работает с фокусом на compliance, безопасность и защиту инвесторов.</p>
+    <div class="trust-grid">
+      <div class="trust-item reveal"><div class="trust-ico">§</div><b>Лицензии и регуляторная база</b><span>Деятельность в рамках лицензионных требований юрисдикции. [Детали — placeholder]</span></div>
+      <div class="trust-item reveal"><div class="trust-ico">KZ</div><b>Юрисдикция</b><span>Банковская инфраструктура в Казахстане, понятная правовая рамка для клиентов.</span></div>
+      <div class="trust-item reveal"><div class="trust-ico">⌂</div><b>Custodian / brokerage</b><span>Хранение активов через профессиональную custodian-инфраструктуру.</span></div>
+      <div class="trust-item reveal"><div class="trust-ico">≡</div><b>Segregated accounts</b><span>Средства клиентов на сегрегированных счетах, отдельно от средств компании.</span></div>
+      <div class="trust-item reveal"><div class="trust-ico">✓</div><b>Compliance и онбординг</b><span>KYC/AML контроль на каждом этапе — от регистрации до расчётов по сделке.</span></div>
+      <div class="trust-item reveal"><div class="trust-ico">⛨</div><b>Безопасность данных</b><span>Шифрование и разграничение доступа к персональным и транзакционным данным.</span></div>
+      <div class="trust-item reveal"><div class="trust-ico">✆</div><b>Поддержка клиентов</b><span>Персональный менеджер и поддержка 24/7 на всех этапах работы.</span></div>
+      <div class="trust-item reveal"><div class="trust-ico">i</div><b>Прозрачность условий</b><span>Все комиссии и условия сделки видны до её совершения — без скрытых пунктов.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 15. ВИДЕО ============ -->
+<section>
+  <div class="wrap">
+    <div class="kicker reveal">Инсайты и интервью</div>
+    <h2 class="h2 reveal">Учитесь у лидеров отрасли</h2>
+    <div class="videos">
+      <div class="video reveal"><div class="video-thumb"><span class="video-tag">Видео · 2 мин</span><div class="play"></div></div><div class="video-body"><b>Следующая волна private markets</b><span>Команда Partner Finance о ценности продукта и логике private markets.</span></div></div>
+      <div class="video reveal"><div class="video-thumb" style="background:linear-gradient(135deg,var(--blue2),var(--blue3))"><span class="video-tag">Демо · 30 сек</span><div class="play" onclick="openTerminal()"></div></div><div class="video-body"><b>Демо терминала</b><span>Интерактивная презентация: от карточки компании до позиции в портфеле.</span></div></div>
+      <div class="video reveal"><div class="video-thumb" style="background:linear-gradient(135deg,var(--blue),var(--red))"><span class="video-tag">Аналитика</span><div class="play"></div></div><div class="video-body"><b>Почему Polymarket и Apptronik вызывают интерес</b><span>Интервью и аналитический тезис от наших экспертов.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 16. FAQ ============ -->
+<section id="faq" style="background:var(--soft)">
+  <div class="wrap">
+    <div class="kicker reveal">Вопросы и ответы</div>
+    <h2 class="h2 reveal">FAQ</h2>
+    <div class="faq-list">
+      <div class="faq-item"><button class="faq-q">Что такое Pre-IPO инвестиции?</button><div class="faq-a"><p>Это покупка акций частных компаний до их выхода на биржу. Инвестор входит по условиям частного рынка — до того, как цена и спрос формируются публичным листингом.</p></div></div>
+      <div class="faq-item"><button class="faq-q">Какой минимальный порог входа?</button><div class="faq-a"><p>Минимальный порог входа по текущим Pre-IPO предложениям — $5 000. Доступный объём зависит от аллокации и указывается в карточке каждой компании.</p></div></div>
+      <div class="faq-item"><button class="faq-q">Как проходит онбординг и KYC?</button><div class="faq-a"><p>Открытие аккаунта, верификация личности и подключение к платформе проходят в одном последовательном процессе внутри приложения.</p></div></div>
+      <div class="faq-item"><button class="faq-q">Где хранятся мои активы и деньги?</button><div class="faq-a"><p>Денежные средства учитываются на сегрегированных счетах, активы — через custodian/brokerage инфраструктуру. Пополнения проходят многоуровневый контроль: банк отправителя → платёжная инфраструктура → банк в Казахстане → KYC/AML Partner Finance.</p></div></div>
+      <div class="faq-item"><button class="faq-q">Какие риски у Pre-IPO?</button><div class="faq-a"><p>Это высокорисковый класс активов: компания может не выйти на IPO, листинг может состояться позже ожиданий или по цене ниже оценки. Возможна частичная или полная потеря вложенных средств.</p></div></div>
+      <div class="faq-item"><button class="faq-q">Когда будет доступна торговля в терминале?</button><div class="faq-a"><p>Мы запускаем инфраструктуру прямой торговли Pre-IPO в экосистеме Partner Finance. Клиенты из waitlist получат доступ первыми.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 17. FINAL CTA: горы ============ -->
+<section class="final" id="access">
+  <div class="final-bg" id="finalBg"></div>
+  <div class="final-shade"></div>
+  <div class="wrap final-grid">
+    <div>
+      <h2 class="reveal">Станьте частью следующего.</h2>
+      <p class="reveal">Получите ранний доступ к эксклюзивным Pre-IPO возможностям и терминалу Partner Finance. Оставьте заявку — менеджер свяжется с вами и поможет пройти онбординг.</p>
+      <div class="final-links reveal">
+        <a href="#access">Запросить доступ к Pre-IPO предложениям</a>
+        <a href="#companies">Получить информацию по доступным компаниям</a>
+        <a href="#terminal">Запросить демо терминала</a>
+      </div>
+    </div>
+    <div class="form reveal">
+      <div id="formBody">
+        <h3>Запросить доступ</h3>
+        <p>Имя, телефон и e-mail — этого достаточно для первого шага.</p>
+        <form id="leadForm">
+          <div class="field"><label>Имя</label><input type="text" required placeholder="Как к вам обращаться"></div>
+          <div class="field"><label>Телефон</label><input type="tel" required placeholder="+7 ___ ___ __ __"></div>
+          <div class="field"><label>E-mail</label><input type="email" required placeholder="you@example.com"></div>
+          <button class="btn btn-red" type="submit">Отправить заявку</button>
+        </form>
+        <p class="form-note">Нажимая кнопку, вы соглашаетесь с политикой обработки персональных данных. [Текст — placeholder для юристов.]</p>
+      </div>
+      <div class="form-ok" id="formOk">
+        <b>Заявка отправлена</b>
+        <span>Менеджер Partner Finance свяжется с вами в ближайшее время.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-logo">PARTNER FINANCE<small>PROSPERITY IN PARTNERSHIP</small></div>
+        <p style="font-size:12px;max-width:260px;line-height:1.6">Доступ к private markets и Pre-IPO компаниям через экосистему Partner Finance.</p>
+      </div>
+      <div class="foot-col"><span>Продукт</span><a href="#companies">Доступные компании</a><a href="#terminal">Терминал</a><a href="#how">Как это работает</a></div>
+      <div class="foot-col"><span>Компания</span><a href="#trust">Лицензии</a><a href="#faq">FAQ</a><a href="#access">Контакты</a></div>
+    </div>
+    <div class="disclaimer">
+      Инвестиции в Pre-IPO компании связаны с высоким риском, включая риск полной потери вложенных средств и риск низкой ликвидности. Упоминание конкретных компаний не является индивидуальной инвестиционной рекомендацией, публичной офертой или гарантией доходности. Указанные цены и оценки — по последним раундам финансирования, носят информационный характер. Прошлые результаты не определяют будущие. [Текст дисклеймера — плейсхолдер, подлежит замене юристами.] © Partner Finance, 2026
+    </div>
+  </div>
+</footer>
+
+<!-- ============ МОДАЛКА: КОМПАНИЯ ============ -->
+<div class="overlay" id="coOverlay" onclick="if(event.target===this)closeCo()">
+  <div class="modal co-modal">
+    <button class="modal-close" onclick="closeCo()">✕</button>
+    <span class="cm-tag">Pre-IPO · Private Markets</span>
+    <div class="cm-head">
+      <div class="cm-logo"><img id="cmLogo" src="" alt=""></div>
+      <div><div class="cm-name" id="cmName"></div><div class="cm-sec" id="cmSec"></div></div>
+    </div>
+    <p class="cm-desc" id="cmDesc"></p>
+    <div class="cm-grid" id="cmGrid"></div>
+    <div class="cm-facts" id="cmFacts"></div>
+    <div class="cm-cta">
+      <button class="btn btn-red" onclick="closeCo();lenis&&lenis.scrollTo('#access',{offset:-70})">Запросить детали</button>
+      <button class="btn-ghostw" onclick="closeCo();openTerminal('preipo')">Смотреть в терминале</button>
+    </div>
+    <p class="cm-disc">Указанная оценка — по последнему раунду финансирования, не является публичной рыночной капитализацией. Информация носит информационный характер и не является публичной офертой.</p>
+  </div>
+</div>
+
+<!-- ============ МОДАЛКА: ТЕРМИНАЛ (PBull) ============ -->
+<div class="overlay" id="tOverlay" onclick="if(event.target===this)closeTerminal()">
+  <div class="modal t-modal">
+    <button class="modal-close" onclick="closeTerminal()">✕</button>
+    <div class="tm-top">
+      <div class="tm-logo">PBULL <small>by Partner Finance</small></div>
+      <div class="tm-tabs">
+        <button class="tm-tab active" id="tabChart" onclick="tmTab('chart')">График</button>
+        <button class="tm-tab" id="tabPreipo" onclick="tmTab('preipo')">Pre-IPO</button>
+      </div>
+      <div class="tm-bal"><span>Оценка портфеля</span><b>616 419,26 $</b></div>
+    </div>
+    <div class="tm-body">
+      <div class="tm-chart">
+        <div class="tm-chart-head"><b id="chTicker">POLYMARKET · Pre-IPO</b><span class="chg up" id="chChg">+4,2% за неделю</span></div>
+        <canvas id="candleCanvas"></canvas>
+        <div class="tm-preipo" id="preipoPane"><h4>Pre-IPO · доступные компании</h4><div id="piList"></div></div>
+      </div>
+      <div class="tm-side">
+        <h5>Watch List</h5>
+        <div id="wlList"></div>
+        <div class="tm-order">
+          <div class="meta"><span>Последняя цена</span><b id="ordPrice">$170,00</b></div>
+          <div class="meta"><span>Доступно</span><b>88 542,18 $</b></div>
+          <div class="row2"><button class="btn-buy" onclick="orderFeedback(this,'Заявка на покупку отправлена')">КУПИТЬ</button><button class="btn-sell" onclick="orderFeedback(this,'Заявка на продажу отправлена')">ПРОДАТЬ</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
+<script>
+/* ================= ДАННЫЕ ================= */
+const MIN = '$5 000';
+const COMPANIES = [
+ {id:'polymarket', name:'Polymarket', sec:'Prediction markets · Future of information', logo:'assets/polymarket.png',
+  price:'$170', valuation:'$15,5 млрд', status:'hot', statusText:'Доступно сейчас', live:true,
+  why:'Крупнейший в мире рынок предсказаний: 1 342 активных рынка, объём $96.7M за 24ч.',
+  desc:'Polymarket — ведущая блокчейн-платформа prediction markets. Инвестиционная возможность в самой быстрорастущей категории Web3, на пересечении data, media и behavioral finance.',
+  facts:['Основана в 2020, Нью-Йорк','Инфраструктура: Polygon, расчёты в USDC','1 342 активных рынка, total volume (24h) $96.7M','Open interest $128.4M, вероятности по топ-событиям 73%'],
+  cells:[['Цена акции','$170'],['Оценка по последнему раунду','$15,5 млрд'],['Минимум','$5 000'],['Основана','2020'],['Активных рынков','1 342'],['Volume 24h','$96.7M']]},
+ {id:'apptronik', name:'Apptronik', sec:'Humanoid robotics · Future of labor', logo:'assets/apptronik.png',
+  price:'$45', valuation:'$5,39 млрд', status:'hot', statusText:'Доступно сейчас', live:true,
+  why:'Гуманоидные роботы Apollo. Партнёрства: Mercedes-Benz, JABIL, Google DeepMind.',
+  desc:'Apptronik — разработчик гуманоидных роботов Apollo для производства, логистики и автоматизации. Инвестиционная возможность в одной из самых перспективных категорий physical AI и robotics.',
+  facts:['Основана в 2016, Остин, Техас','Привлечено $965M, Series A Ext $520M','TAM 2030: $40 млрд (humanoid robotics)','Enterprise-сигналы: Mercedes-Benz, JABIL, Google DeepMind'],
+  cells:[['Цена входа','$45'],['Оценка по последнему раунду','$5,39 млрд'],['Минимум','$5 000'],['Привлечено','$965M'],['TAM 2030','$40B'],['Робот','Apollo']]},
+ {id:'lambda', name:'Lambda', sec:'AI infrastructure', logo:'assets/lambda.svg',
+  price:'$62.50', valuation:'≈ $11,43 млрд', status:'lim', statusText:'Limited', live:true,
+  why:'Вычислительная инфраструктура для эпохи ИИ. NVIDIA 7× Partner of the Year.',
+  desc:'Lambda зарабатывает не на том, какая ИИ-модель победит. Вычисления нужны всем: GPU-инфраструктура для обучения и инференса моделей с коммерческой валидацией.',
+  facts:['Series E: >$1,5 млрд привлечено (ноябрь 2025)','Многомиллиардное соглашение с Microsoft на ИИ-инфраструктуру','NVIDIA 7× Partner of the Year, Exemplar Cloud','Потенциальный горизонт IPO: 2027–2028'],
+  cells:[['Цена входа','$62.50'],['Ориент. оценка','≈ $11,43 млрд'],['Минимум','$5 000'],['Горизонт IPO','2027–2028'],['Раунд','Series E'],['Партнёр','NVIDIA']]},
+ {id:'perplexity', name:'Perplexity', sec:'AI search · Исследования · Агенты', logo:'assets/perplexity.png',
+  price:'$92.40', valuation:'≈ $27,28B', status:'open', statusText:'Open', live:true,
+  why:'Мультимодальная ИИ-платформа поиска. Выручка >$750M, дистрибуция Samsung.',
+  desc:'Perplexity — мультимодальная ИИ-платформа для поиска, глубоких исследований и агентных рабочих процессов. Тезис основан на расширении продукта и его монетизации, а не только на следующем раунде.',
+  facts:['Текущая оферта $92.40; последний подтверждённый раунд ≈ $20.53B ($69.54/акция)','Годовая выручка >$750M (в пересчёте на год)','50 000+ организаций, дистрибуция Samsung','Работает с ведущими ИИ-моделями: OpenAI, Anthropic, Google, Meta, xAI, Mistral'],
+  cells:[['Цена входа','$92.40'],['Ориент. оценка','≈ $27.28B'],['Минимум','$5 000'],['Выручка','> $750M'],['Организации','50 000+'],['Статус','Текущая оферта']]},
+ {id:'sambanova', name:'SambaNova', sec:'AI chips · Inference infrastructure', logo:'assets/sambanova.png',
+  price:'по запросу', valuation:'по запросу', status:'open', statusText:'Open', live:true,
+  why:'Инфраструктура для ИИ: быстрее и энергоэффективнее универсальных GPU.',
+  desc:'SambaNova создаёт специализированную инфраструктуру для ИИ, оптимизированную для быстрого и энергоэффективного запуска больших ИИ-моделей: «скоростная железная дорога» вместо «универсального грузовика».',
+  facts:['Специализация: инференс больших ИИ-моделей','Выше скорость обработки, ниже стоимость запуска ИИ на масштабе','Энергоэффективность — ключевое преимущество при росте цен на электроэнергию','Полный путь: от запроса до ответа — на оптимизированной инфраструктуре'],
+  cells:[['Цена входа','по запросу'],['Оценка','по запросу'],['Минимум','$5 000'],['Фокус','Инференс'],['Категория','AI chips'],['Статус','Open']]}
+];
+const badgeClass = s => s==='hot'?'badge hot':(s==='lim'?'badge lim':'badge');
+const share = p => p.startsWith('$')?' / share':'';
+
+/* строки терминала (hero- и cine-мокап) */
+const rowsHTML = COMPANIES.map(c=>`
+ <div class="trow"><div class="co"><div class="co-logo"><img src="${c.logo}" alt="${c.name}"></div><div><div class="co-name">${c.name}</div><div class="co-sec">${c.sec.split('·')[0]}</div></div></div>
+ <div class="price"><b>${c.price}${share(c.price)}</b><span class="${badgeClass(c.status)}">${c.statusText}</span></div></div>`).join('');
+document.getElementById('cineRows').innerHTML = rowsHTML;
+
+/* карточки для cine-сцены */
+document.getElementById('cineCards').innerHTML = COMPANIES.map(c=>`
+ <div class="cine-card">
+  <div class="cc-top"><div class="co-logo"><img src="${c.logo}" alt=""></div><span class="badge live">● LIVE</span></div>
+  <div><div class="cc-name">${c.name}</div><div class="cc-sec">${c.sec.split('·')[0]}</div></div>
+  <div class="cc-meta"><div><span>Цена</span><b>${c.price}</b></div><div><span>Минимум</span><b>${MIN}</b></div></div>
+ </div>`).join('');
+
+/* strip: компактные карточки (референс-стиль, кликабельные) */
+document.getElementById('strip').innerHTML = COMPANIES.map(c=>`
+ <div class="strip-card reveal" onclick="openCo('${c.id}')">
+  <div class="cc-top"><div class="co-logo" style="width:44px;height:44px;border-radius:11px"><img src="${c.logo}" style="width:28px;height:28px" alt=""></div><span class="badge live">● LIVE</span></div>
+  <div><div class="cc-name">${c.name}</div><div class="cc-sec">${c.sec.split('·')[0]}</div></div>
+  <p class="cc-why">${c.why}</p>
+  <div class="cc-meta"><div><span>за акцию</span><b>${c.price}</b></div><div><span>мин. инвестиции</span><b>${MIN}</b></div></div>
+  <div class="cc-btn">Инвестировать →</div>
+ </div>`).join('');
+
+/* marquee */
+const t1=['POLY','APPX','LMDA','PRPX','SNVA','NVDA','TSLA','SPCE','FIG','CRCL','AMD','ARM'];
+const t2=['CRCL','ARM','SNVA','TSLA','POLY','FIG','AMD','LMDA','SPCE','PRPX','NVDA','APPX'];
+function mq(list){
+  return (list.concat(list)).map(t=>{
+    const c = COMPANIES.find(x=>x.name.slice(0,3).toUpperCase()===t.slice(0,3));
+    return `<div class="mq-tile">${c?`<img src="${c.logo}" alt="">`:''}${t}<span>IPO ✓</span></div>`;
+  }).join('');
+}
+document.getElementById('mqTrack1').innerHTML = mq(t1);
+document.getElementById('mqTrack2').innerHTML = mq(t2);
+
+/* ================= модалка компании ================= */
+function openCo(id){
+  const c = COMPANIES.find(x=>x.id===id); if(!c) return;
+  document.getElementById('cmLogo').src = c.logo;
+  document.getElementById('cmName').textContent = c.name;
+  document.getElementById('cmSec').textContent = c.sec;
+  document.getElementById('cmDesc').textContent = c.desc;
+  document.getElementById('cmGrid').innerHTML = c.cells.map(x=>`<div class="cm-cell"><span>${x[0]}</span><b>${x[1]}</b></div>`).join('');
+  document.getElementById('cmFacts').innerHTML = c.facts.map(f=>`<div class="cm-fact">${f}</div>`).join('');
+  show('coOverlay');
+}
+function closeCo(){hide('coOverlay')}
+
+/* ================= модалка терминала ================= */
+const WL = [{t:'POLY',n:'Polymarket',p:170,c:4.2},{t:'APPX',n:'Apptronik',p:45,c:1.8},{t:'LMDA',n:'Lambda',p:62.5,c:-0.9},{t:'PRPX',n:'Perplexity',p:92.4,c:2.6},{t:'SNVA',n:'SambaNova',p:31.2,c:0.7}];
+let curTicker = 0;
+function openTerminal(pane){show('tOverlay'); if(pane==='preipo') tmTab('preipo'); else tmTab('chart'); requestAnimationFrame(drawCandles)}
+function closeTerminal(){hide('tOverlay')}
+function tmTab(which){
+  document.getElementById('tabChart').classList.toggle('active', which==='chart');
+  document.getElementById('tabPreipo').classList.toggle('active', which==='preipo');
+  document.getElementById('preipoPane').classList.toggle('show', which==='preipo');
+  if(which==='preipo') renderPiList();
+}
+function renderPiList(){
+  document.getElementById('piList').innerHTML = COMPANIES.map(c=>`
+   <div class="pi-row" onclick="closeTerminal();openCo('${c.id}')">
+    <div class="pi-co"><div class="co-logo"><img src="${c.logo}"></div><div><b>${c.name}</b><span>${c.sec.split('·')[0]}</span></div></div>
+    <div class="pi-right"><b>${c.price}</b><span class="${badgeClass(c.status)}">${c.statusText}</span><button class="pi-btn" onclick="event.stopPropagation();orderFeedback(this,'Заявка отправлена')">Купить</button></div>
+   </div>`).join('');
+}
+document.getElementById('wlList').innerHTML = WL.map((w,i)=>`
+ <div class="wl-row" onclick="selectTicker(${i})"><b>${w.t}</b><div class="p"><b>$${w.p.toFixed(2)}</b><span class="chg ${w.c>=0?'up':'dn'}" style="font-size:10px">${w.c>=0?'+':''}${w.c}%</span></div></div>`).join('');
+function selectTicker(i){
+  curTicker = i;
+  const w = WL[i];
+  document.getElementById('chTicker').textContent = w.n.toUpperCase()+' · Pre-IPO';
+  const chg = document.getElementById('chChg');
+  chg.textContent = (w.c>=0?'+':'')+w.c+'% за неделю';
+  chg.className = 'chg '+(w.c>=0?'up':'dn');
+  document.getElementById('ordPrice').textContent = '$'+w.p.toFixed(2);
+  tmTab('chart'); drawCandles();
+}
+function drawCandles(){
+  const cv = document.getElementById('candleCanvas');
+  const dpr = window.devicePixelRatio||1;
+  const W = cv.clientWidth, H = cv.clientHeight;
+  cv.width = W*dpr; cv.height = H*dpr;
+  const ctx = cv.getContext('2d'); ctx.scale(dpr,dpr);
+  ctx.clearRect(0,0,W,H);
+  ctx.strokeStyle = '#1c2a5e'; ctx.lineWidth = 1;
+  for(let y=0;y<H;y+=44){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}
+  const n = Math.floor(W/14), cw = 7, base = WL[curTicker].p;
+  let price = base*0.9, series = [];
+  for(let i=0;i<n;i++){
+    const o = price, drift = (Math.random()-0.44)*base*0.025;
+    const cl = o+drift, hi = Math.max(o,cl)+Math.random()*base*0.01, lo = Math.min(o,cl)-Math.random()*base*0.01;
+    series.push({o,cl,hi,lo}); price = cl;
+  }
+  const mn = Math.min(...series.map(s=>s.lo)), mx = Math.max(...series.map(s=>s.hi));
+  const pad = 24, map = v => pad + (mx-v)/(mx-mn)*(H-2*pad);
+  series.forEach((s,i)=>{
+    const x = i*14+4, up = s.cl>=s.o;
+    ctx.strokeStyle = ctx.fillStyle = up? '#17C784':'#BF1736';
+    ctx.beginPath(); ctx.moveTo(x+cw/2, map(s.hi)); ctx.lineTo(x+cw/2, map(s.lo)); ctx.stroke();
+    ctx.fillRect(x, map(Math.max(s.o,s.cl)), cw, Math.max(2, Math.abs(map(s.o)-map(s.cl))));
+  });
+  ctx.setLineDash([4,4]); ctx.strokeStyle = '#5E74C9';
+  ctx.beginPath(); ctx.moveTo(0, map(price)); ctx.lineTo(W, map(price)); ctx.stroke(); ctx.setLineDash([]);
+  ctx.fillStyle = '#5E74C9'; ctx.font = '11px Montserrat, sans-serif';
+  ctx.fillText('$'+price.toFixed(2), W-64, map(price)-6);
+}
+function orderFeedback(btn,msg){
+  const old = btn.textContent;
+  btn.textContent = '✓ '+msg; btn.disabled = true; btn.style.opacity = .85;
+  setTimeout(()=>{btn.textContent = old; btn.disabled=false; btn.style.opacity=1}, 2200);
+}
+
+/* ================= общие ================= */
+let lenis = null;
+function show(id){document.getElementById(id).classList.add('show'); document.body.style.overflow='hidden'; if(lenis)lenis.stop()}
+function hide(id){document.getElementById(id).classList.remove('show'); document.body.style.overflow=''; if(lenis)lenis.start()}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeCo();closeTerminal()}});
+
+/* sticky screens */
+const screens=[
+ `<h4>Polymarket</h4><div class="screen-line"><span>Сектор</span><b>Prediction markets</b></div><div class="screen-line"><span>Тезис</span><b>Data × media × behavioral finance</b></div><div class="screen-line"><span>Статус</span><span class="status-pill st-done">Доступно сейчас</span></div><div class="big-btn">Открыть компанию</div>`,
+ `<h4>Условия сделки</h4><div class="screen-line"><span>Цена</span><b>$170 / share</b></div><div class="screen-line"><span>Минимум</span><b>$5 000</b></div><div class="screen-line"><span>Доступный объём</span><b>обновляется</b></div><div class="screen-line"><span>Комиссия</span><b>Прозрачно, до сделки</b></div>`,
+ `<h4>Подача заявки</h4><div class="screen-line"><span>Компания</span><b>Polymarket</b></div><div class="screen-line"><span>Сумма</span><b>$5 000</b></div><div class="big-btn">Подтвердить и разместить</div>`,
+ `<h4>Статус исполнения</h4><div class="screen-line"><span>Заявка</span><span class="status-pill st-done">Принята</span></div><div class="screen-line"><span>Аллокация</span><span class="status-pill st-pending">Pending</span></div><div class="screen-line"><span>Сделка</span><span class="status-pill st-conf">Ожидает подтверждения</span></div>`,
+ `<h4>Уведомления</h4><div class="screen-line"><b>Order received</b><span>только что</span></div><div class="screen-line"><b>Allocation updated</b><span>2 мин</span></div><div class="screen-line"><b>Deal confirmed</b><span>—</span></div>`,
+ `<h4>Портфель</h4><div class="screen-line"><span>Polymarket</span><b>$5 000</b></div><div class="screen-line"><span>Apptronik</span><b>$5 000</b></div><div class="screen-line"><span>Общая стоимость</span><b>616 419,26 $</b></div><div class="screen-line"><span>Статус позиции</span><span class="status-pill st-done">В holdings</span></div>`
+];
+const screenEl=document.getElementById('screen'), titleEl=document.getElementById('screenTitle');
+function setScreen(i){screenEl.innerHTML=screens[i];titleEl.textContent='Terminal — Шаг 0'+(i+1)+' / 06'}
+setScreen(0);
+const steps=document.querySelectorAll('.step');
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){steps.forEach(s=>s.classList.remove('active'));e.target.classList.add('active');setScreen(+e.target.dataset.screen)}})},{rootMargin:'-45% 0px -45% 0px'});
+steps.forEach(s=>io.observe(s));
+
+/* До/После slider */
+const ba=document.getElementById('ba'), baAfter=document.getElementById('baAfter'), baHandle=document.getElementById('baHandle'), baKnob=document.getElementById('baKnob');
+function setBA(pct){
+  pct=Math.max(4,Math.min(96,pct));
+  baAfter.style.clipPath=`inset(0 0 0 ${pct}%)`;
+  baHandle.style.left=pct+'%'; baKnob.style.left=pct+'%';
+}
+let dragging=false;
+function baMove(x){const r=ba.getBoundingClientRect(); setBA((x-r.left)/r.width*100)}
+ba.addEventListener('pointerdown',e=>{dragging=true;baMove(e.clientX)});
+addEventListener('pointermove',e=>{if(dragging)baMove(e.clientX)});
+addEventListener('pointerup',()=>dragging=false);
+
+/* FAQ */
+document.querySelectorAll('.faq-item').forEach(it=>{
+  it.querySelector('.faq-q').addEventListener('click',()=>{
+    const open=it.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(o=>{o.classList.remove('open');o.querySelector('.faq-a').style.maxHeight=null});
+    if(!open){it.classList.add('open');const a=it.querySelector('.faq-a');a.style.maxHeight=a.scrollHeight+'px'}
+  });
+});
+
+/* форма */
+document.getElementById('leadForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  document.getElementById('formBody').style.display='none';
+  document.getElementById('formOk').style.display='block';
+});
+
+/* ================= Lenis + GSAP ================= */
+const Q = new URLSearchParams(location.search);
+const DEBUG_ALL = Q.has('all');
+const SHOT = Q.get('shot');          // 0..1 — статичный кадр cine-сцены
+const SCROLL_TO = Q.get('scroll');   // мгновенный скролл для скриншотов
+const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const DESKTOP = matchMedia('(min-width: 1000px)').matches;
+
+gsap.registerPlugin(ScrollTrigger);
+
+if(SHOT===null && !REDUCED){
+  lenis = new Lenis({duration:1.15, smoothWheel:true});
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add(t=>lenis.raf(t*1000));
+  gsap.ticker.lagSmoothing(0);
+}
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault(); lenis?lenis.scrollTo(t,{offset:-70}):t.scrollIntoView()}
+  });
+});
+addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>10));
+
+/* reveal-анимации */
+if(DEBUG_ALL){
+  gsap.set('.reveal',{opacity:1,y:0});
+}else{
+  gsap.set('.reveal',{opacity:0,y:36});
+  ScrollTrigger.batch('.reveal',{start:'top 88%',onEnter:els=>gsap.to(els,{opacity:1,y:0,duration:.9,ease:'power3.out',stagger:.12})});
+}
+
+/* hero: вылет чипов + параллакс рук */
+if(SHOT===null && !REDUCED){
+  gsap.from('.hero-hands',{y:120,opacity:0,duration:1.2,ease:'power3.out',delay:.2});
+  gsap.from('.hero-chip',{scale:.5,opacity:0,duration:.8,ease:'back.out(2)',stagger:.15,delay:.7,clearProps:'scale,opacity'});
+  gsap.to('.hero-hands',{y:60,scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:1}});
+  gsap.to('.hero-grid>div:first-child',{y:-40,scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:1}});
+}
+
+/* ================= CINE: pinned сцена =================
+   0.00–0.30  терминал «лежит» (rotateX 62°) → встаёт фронтально
+   0.30–0.45  холд, заголовок уходит
+   0.45–0.62  терминал уходит вглубь и тает
+   0.55–0.80  карточки вылетают снизу каскадом, выстраиваются в ряд
+   0.80–0.92  холд (карточки кликабельны)
+   0.92–1.00  карточки уезжают вниз и тают
+======================================================== */
+const cineCards = gsap.utils.toArray('.cine-card');
+const capText = document.getElementById('cineCapText');
+function buildCineTl(){
+  const tl = gsap.timeline({paused:true, defaults:{ease:'power2.out'}});
+  tl.set(cineCards,{pointerEvents:'none'},0);
+  tl.fromTo('#cineTerm',
+      {rotateX:62, y:'42vh', opacity:0, scale:.92, transformOrigin:'50% 100%'},
+      {rotateX:0, y:0, opacity:1, scale:1, duration:.30}, 0)
+    .to('#cineCap',{opacity:0, y:-40, duration:.10}, .28)
+    .to('#cineTerm',{duration:.10}, .30)                                       // холд терминала
+    .to('#cineTerm',{scale:.72, y:'-14vh', opacity:0, filter:'blur(8px)', duration:.17, ease:'power2.in'}, .45)
+    .fromTo(capText, {}, {duration:.01}, .50)
+    .call(()=>{capText.innerHTML='5 компаний доступны сейчас.<br>Вход от $5 000.'}, null, .55)
+    .to('#cineCap',{opacity:1, y:0, duration:.08}, .55)
+    .fromTo(cineCards,
+      {y:'70vh', opacity:0, rotateX:24},
+      {y:0, opacity:1, rotateX:0, duration:.20, stagger:.035, ease:'power3.out'}, .58)
+    .set(cineCards,{pointerEvents:'auto'}, .78)
+    .to(cineCards,{duration:.12}, .80)                                          // холд карточек
+    .set(cineCards,{pointerEvents:'none'}, .92)
+    .to(cineCards,{y:'40vh', opacity:0, duration:.08, stagger:.012, ease:'power2.in'}, .92)
+    .to('#cineCap',{opacity:0, duration:.06}, .94);
+  return tl;
+}
+const cineTl = buildCineTl();
+cineCards.forEach((el,i)=>el.addEventListener('click',()=>openCo(COMPANIES[i].id)));
+
+if(SHOT!==null){
+  /* режим скриншота: без пина, статичный кадр, фиксированная высота сцены */
+  document.getElementById('cineStage').style.height='900px';
+  cineTl.progress(parseFloat(SHOT));
+}else if(REDUCED || !DESKTOP){
+  cineTl.progress(0.85);
+  gsap.set(cineCards,{y:0,opacity:1,rotateX:0,pointerEvents:'auto'});
+  document.getElementById('cine').style.padding='40px 0';
+}else{
+  cineTl.progress(0);
+  ScrollTrigger.create({
+    trigger:'#cineStage', start:'top top', end:'+=280%',
+    pin:true, scrub:1, anticipatePin:1,
+    onUpdate:self=>cineTl.progress(self.progress)
+  });
+}
+
+/* манифест: параллакс фона и контента */
+if(SHOT===null && !REDUCED){
+  gsap.fromTo('#maniBg',{yPercent:-8},{yPercent:8,scrollTrigger:{trigger:'.mani',start:'top bottom',end:'bottom top',scrub:1}});
+  gsap.fromTo('#finalBg',{yPercent:-6},{yPercent:6,scrollTrigger:{trigger:'.final',start:'top bottom',end:'bottom top',scrub:1}});
+}
+
+/* мгновенный «скролл» для скриншот-проверки: сдвиг body (headless не репеинтит scroll) */
+if(SCROLL_TO){
+  addEventListener('load',()=>setTimeout(()=>{
+    document.body.style.transform=`translateY(-${+SCROLL_TO}px)`;
+  },400));
+}
+
+window.addEventListener('resize',()=>{if(document.getElementById('tOverlay').classList.contains('show'))drawCandles()});
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<script setup>
+import DraftButton from './DraftButton.vue'
+</script>
+
+<template>
+  <section id="hero" class="hero-block">
+    <div class="section-shell hero-layout">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> PRIVATE MARKETS · PRE-IPO</div>
+        <h1>Инвестируйте в <em>Pre-IPO компании</em> раньше рынка</h1>
+        <p class="hero-description">Покупайте акции частных компаний по актуальным условиям уже сейчас. Скоро — с возможностью прямой торговли через терминал Partner Finance.</p>
+        <div class="hero-buttons">
+          <DraftButton label="Смотреть доступные компании" href="#companies" tone="primary" arrow />
+          <DraftButton label="Скачать приложение" tone="outline" />
+        </div>
+        <div class="hero-footnote"><span class="status-pulse"></span> 5 Pre-IPO компаний в текущем каталоге</div>
+      </div>
+      <div class="hero-art" aria-label="Заглушки реальных экранов терминала и мобильного приложения">
+        <div class="hero-halo"></div>
+        <div class="desktop-frame">
+          <div class="frame-bar"><span></span><span></span><span></span><b>PBULL TERMINAL</b></div>
+          <div class="desktop-placeholder">
+            <div class="placeholder-icon">▤</div>
+            <div class="placeholder-kicker">SCREENSHOT PLACEHOLDER · DESKTOP</div>
+            <strong>Терминал Partner Finance</strong>
+            <p>Сюда поставим реальный скриншот<br>десктопного интерфейса</p>
+          </div>
+        </div>
+        <div class="phone-frame hero-phone">
+          <div class="phone-island"></div>
+          <div class="phone-screen">
+            <div class="phone-brand">PBULL <span>BY PARTNER FINANCE</span></div>
+            <div class="placeholder-icon">▦</div>
+            <div class="placeholder-kicker">SCREENSHOT PLACEHOLDER · MOBILE</div>
+            <strong>Pre-IPO предложения</strong>
+            <p>Apptronik · Polymarket<br>Lambda · Perplexity<br>SambaNova</p>
+            <span class="phone-screen-note">Реальный скриншот добавим позже</span>
+          </div>
+        </div>
+        <div class="hero-art-caption"><span class="caption-line"></span> Телефон — главный объект первой сцены</div>
+      </div>
+    </div>
+    <div class="hero-bottomline section-shell"><span>01 / 10</span><span>Листайте, чтобы изучить возможности <span aria-hidden="true">↓</span></span></div>
+  </section>
+</template>
