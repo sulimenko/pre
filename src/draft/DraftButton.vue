@@ -18,6 +18,7 @@ const handleClick = () => placeholderAction?.(props.context || props.label)
     {{ label }} <span v-if="arrow" aria-hidden="true">↗</span>
   </a>
   <button v-else type="button" class="draft-btn" :class="'draft-btn--' + tone" @click="handleClick">
-    {{ label }} <span v-if="arrow" aria-hidden="true">↗</span>
+    <span class="draft-btn-copy">{{ label }}<small>Подключим позже</small></span>
+    <span v-if="arrow" aria-hidden="true">↗</span>
   </button>
 </template>

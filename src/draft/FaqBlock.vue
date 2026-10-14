@@ -16,10 +16,12 @@ const toggle = (index) => { active.value = active.value===index ? -1 : index }
       </div>
       <div class="faq-list">
         <div v-for="(item,i) in faqs" :key="i" class="faq-item" :class="{ 'faq-item--active': active===i }">
-          <button type="button" class="faq-question" :aria-expanded="active===i" @click="toggle(i)">
-            <span>{{ item.question }}</span><span class="faq-plus">{{ active===i ? '−' : '+' }}</span>
+          <button :id="'faq-question-' + i" type="button" class="faq-question" :aria-expanded="active===i"
+            :aria-controls="'faq-answer-' + i" @click="toggle(i)">
+            <span>{{ item.question }}</span><span class="faq-plus" aria-hidden="true">{{ active===i ? '−' : '+' }}</span>
           </button>
-          <div v-if="active===i" class="faq-answer"><p>{{ item.answer }}</p></div>
+          <div v-show="active===i" :id="'faq-answer-' + i" class="faq-answer" role="region"
+            :aria-labelledby="'faq-question-' + i"><p>{{ item.answer }}</p></div>
         </div>
       </div>
     </div>

@@ -11,7 +11,8 @@ const scene = computed(() => processScenes[active.value])
       <div class="section-heading section-heading--center">
         <p class="section-kicker">06 / ПУТЬ ИНВЕСТОРА</p>
         <h2>Быстро. Прозрачно. Просто.</h2>
-        <p>Один путь в приложении: открытие счёта, документы, пополнение и инвестиции. Без лишней суеты — от первого входа до портфеля.</p>
+        <p>В PBull уже доступны удобная регистрация, быстрое совершение обычных сделок и удобный портфель.</p>
+        <span class="section-state">Прямая торговля Pre-IPO появится позже</span>
       </div>
       <div class="process-switch" role="group" aria-label="Этапы инвестиционного процесса">
         <button v-for="(item,i) in processScenes" :key="item.keyword" type="button"
@@ -24,12 +25,12 @@ const scene = computed(() => processScenes[active.value])
           <div class="process-ring process-ring--one"></div><div class="process-ring process-ring--two"></div>
           <div class="phone-frame process-phone">
             <div class="phone-island"></div>
-            <div class="phone-screen">
+            <div class="phone-screen" aria-live="polite" aria-atomic="true">
               <div class="phone-brand">PBULL <span>USER FLOW</span></div>
               <div class="placeholder-icon">▦</div>
-              <div class="placeholder-kicker">РЕАЛЬНЫЙ СКРИНШОТ</div>
+              <div class="placeholder-kicker">ЗАГЛУШКА · PBULL</div>
               <strong>{{ scene.screenshot }}</strong>
-              <p>Экран из реального приложения</p>
+              <p>Здесь будет реальный экран приложения</p>
             </div>
           </div>
         </div>
@@ -41,10 +42,10 @@ const scene = computed(() => processScenes[active.value])
             <div v-for="(stage,i) in scene.stages" :key="stage" class="process-item">
               <span>{{ String(i+1).padStart(2,'0') }}</span>
               <strong>{{ stage }}</strong>
-              <span class="process-check">✓</span>
+              <span class="process-check" aria-hidden="true">→</span>
             </div>
           </div>
-          <p class="wireframe-footnote">В финале три состояния будут последовательно сменяться вокруг одного телефона при скролле.</p>
+          <p class="wireframe-footnote">Иллюстрация процесса обычных сделок, без выполнения операций. Реальные экраны и подробности проверок добавим после подтверждения.</p>
         </div>
       </div>
     </div>

@@ -21,7 +21,7 @@ import DraftButton from './DraftButton.vue'
           <div class="frame-bar"><span></span><span></span><span></span><b>PBULL TERMINAL</b></div>
           <div class="desktop-placeholder">
             <div class="placeholder-icon">▤</div>
-            <div class="placeholder-kicker">SCREENSHOT PLACEHOLDER · DESKTOP</div>
+            <div class="placeholder-kicker">ЗАГЛУШКА · DESKTOP</div>
             <strong>Терминал Partner Finance</strong>
             <p>Сюда поставим реальный скриншот<br>десктопного интерфейса</p>
           </div>
@@ -31,10 +31,10 @@ import DraftButton from './DraftButton.vue'
           <div class="phone-screen">
             <div class="phone-brand">PBULL <span>BY PARTNER FINANCE</span></div>
             <div class="placeholder-icon">▦</div>
-            <div class="placeholder-kicker">SCREENSHOT PLACEHOLDER · MOBILE</div>
+            <div class="placeholder-kicker">ЗАГЛУШКА · MOBILE</div>
             <strong>Pre-IPO предложения</strong>
             <p>Apptronik · Polymarket<br>Lambda · Perplexity<br>SambaNova</p>
-            <span class="phone-screen-note">Реальный скриншот добавим позже</span>
+            <span class="phone-screen-note">Будущий экран Pre-IPO. Реальный скриншот добавим после готовности функции.</span>
           </div>
         </div>
         <div class="hero-art-caption"><span class="caption-line"></span> Телефон — главный объект первой сцены</div>

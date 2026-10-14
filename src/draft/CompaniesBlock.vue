@@ -10,7 +10,8 @@ const statusTone = { hot: 'available', lim: 'limited', open: 'open' }
       <div class="section-heading section-heading--center">
         <p class="section-kicker">02 / ИНВЕСТИЦИОННЫЕ ВОЗМОЖНОСТИ</p>
         <h2>Что доступно сейчас</h2>
-        <p>Пять Pre-IPO компаний в текущем каталоге. Изучите сектор, цену, условия участия и краткий инвестиционный тезис.</p>
+        <p>Pre-IPO компании в текущем каталоге. Изучите сектор, цену, условия участия и краткий инвестиционный тезис.</p>
+        <span class="section-state">Черновые условия: цены, минимумы и статусы требуют подтверждения</span>
       </div>
       <div class="companies-grid">
         <article v-for="company in COMPANIES" :key="company.id" class="company-card">
@@ -27,7 +28,7 @@ const statusTone = { hot: 'available', lim: 'limited', open: 'open' }
           </div>
           <div class="company-terms">
             <div><span>Цена за акцию</span><strong>{{ company.price }}</strong></div>
-            <div><span>Мин. инвестиции</span><strong>{{ MIN }}</strong></div>
+            <div><span>Мин. инвестиции</span><strong>{{ company.minimum || MIN }}</strong></div>
           </div>
           <DraftButton label="Запросить детали" :context="'Запросить детали: ' + company.name" tone="card" arrow />
         </article>

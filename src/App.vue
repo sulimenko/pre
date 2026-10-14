@@ -17,7 +17,7 @@ const notice = ref('')
 let noticeTimeout
 
 provide(draftActionKey, (description) => {
-  notice.value = description + ' — подключим на следующем этапе'
+  notice.value = description + ' — подключим позже. В макете действие не выполняется.'
   clearTimeout(noticeTimeout)
   noticeTimeout = setTimeout(() => { notice.value = '' }, 3500)
 })
