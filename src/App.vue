@@ -12,8 +12,11 @@ import TrustBlock from './draft/TrustBlock.vue'
 import VideosBlock from './draft/VideosBlock.vue'
 import FaqBlock from './draft/FaqBlock.vue'
 import CtaBlock from './draft/CtaBlock.vue'
+import { useHeroScrollProgress } from './draft/useHeroScrollProgress'
 
 const notice = ref('')
+const heroScene = ref(null)
+useHeroScrollProgress(heroScene)
 let noticeTimeout
 
 provide(draftActionKey, (description) => {
@@ -27,8 +30,10 @@ onBeforeUnmount(() => clearTimeout(noticeTimeout))
 <template>
   <DraftHeader />
   <main>
-    <HeroBlock />
-    <CompaniesBlock />
+    <div ref="heroScene" class="hero-companies-scene">
+      <HeroBlock />
+      <CompaniesBlock />
+    </div>
     <WhyBlock />
     <TerminalBlock />
     <MarketBlock />

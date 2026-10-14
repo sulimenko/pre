@@ -7,11 +7,15 @@ const statusTone = { hot: 'available', lim: 'limited', open: 'open' }
 <template>
   <section id="companies" class="section-pad companies-block">
     <div class="section-shell">
-      <div class="section-heading section-heading--center">
-        <p class="section-kicker">02 / ИНВЕСТИЦИОННЫЕ ВОЗМОЖНОСТИ</p>
-        <h2>Что доступно сейчас</h2>
-        <p>Pre-IPO компании в текущем каталоге. Изучите сектор, цену, условия участия и краткий инвестиционный тезис.</p>
-        <span class="section-state">Черновые условия: цены, минимумы и статусы требуют подтверждения</span>
+      <div class="companies-heading-rail">
+        <div class="companies-heading-stage">
+          <div class="section-heading section-heading--center companies-heading">
+            <p class="section-kicker">02 / ИНВЕСТИЦИОННЫЕ ВОЗМОЖНОСТИ</p>
+            <h2>Что доступно сейчас</h2>
+            <p>Pre-IPO компании в текущем каталоге. Изучите сектор, цену, условия участия и краткий инвестиционный тезис.</p>
+            <span class="section-state">Черновые условия: цены, минимумы и статусы требуют подтверждения</span>
+          </div>
+        </div>
       </div>
       <div class="companies-grid">
         <article v-for="company in COMPANIES" :key="company.id" class="company-card">

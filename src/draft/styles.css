@@ -120,6 +120,69 @@ p { line-height: 1.7; }
 }
 .hero-bottomline { display: flex; justify-content: space-between; gap: 20px; padding-block: 34px; color: var(--muted); font-size: 11px; }
 
+/* One sticky stage and one pair of devices, shared with the actual catalog heading.
+   The ordinary document layout is the default for touch-sized and reduced-motion views. */
+.hero-companies-scene { position: relative; }
+@media (min-width: 801px) and (min-height: 800px) and (prefers-reduced-motion: no-preference) {
+  .hero-companies-scene--scrub {
+    --scene-top: 112px;
+    --scene-height: 320svh;
+    --scene-stage-height: calc(100svh - var(--scene-top));
+    background: var(--scene-background, #f8f9f6);
+  }
+  .hero-companies-scene--scrub .hero-block {
+    height: var(--scene-height); padding-top: 0; border-bottom: 0;
+  }
+  .hero-companies-scene--scrub .hero-stage {
+    position: sticky; top: var(--scene-top); height: var(--scene-stage-height);
+    overflow: clip; z-index: 1; pointer-events: none;
+  }
+  .hero-companies-scene--scrub .hero-layout { display: block; }
+  .hero-companies-scene--scrub .hero-copy {
+    position: relative; z-index: 3; padding-top: 24px; pointer-events: auto;
+    transform: translate3d(0, var(--copy-y), 0); opacity: var(--copy-opacity);
+    will-change: transform, opacity;
+  }
+  .hero-companies-scene--scrub .hero-art {
+    position: absolute; inset: 0; display: block; width: 100%; height: 100%;
+    pointer-events: none;
+  }
+  .hero-companies-scene--scrub .hero-art .desktop-frame {
+    position: absolute; left: 15%; top: 0; width: 70%;
+    transform-origin: center top;
+    transform: translate3d(0, var(--desktop-y), 0) perspective(1200px) rotateX(var(--desktop-tilt)) scale(var(--desktop-scale));
+    opacity: var(--desktop-opacity); will-change: transform, opacity;
+  }
+  .hero-companies-scene--scrub .hero-phone {
+    position: absolute; left: 0; top: 0; width: clamp(200px, min(18vw, calc(var(--scene-stage-height) * .4)), 320px);
+    margin: 0; transform-origin: center top;
+    transform: translate3d(var(--phone-x), var(--phone-y), 0) translateX(-50%) perspective(1200px) rotateX(var(--phone-tilt)) rotateZ(var(--phone-roll)) scale(var(--phone-scale));
+    opacity: var(--phone-opacity); will-change: transform, opacity;
+  }
+  .hero-companies-scene--scrub .hero-bottomline {
+    position: absolute; bottom: 0; left: 0; right: 0; pointer-events: none;
+    opacity: var(--copy-opacity);
+  }
+  .hero-companies-scene--scrub .companies-heading-rail {
+    position: absolute; top: 0; left: 0; right: 0; height: var(--scene-height);
+    pointer-events: none;
+  }
+  .hero-companies-scene--scrub .companies-heading-stage {
+    position: sticky; top: var(--scene-top); height: var(--scene-stage-height);
+  }
+  .hero-companies-scene--scrub .companies-heading {
+    position: absolute; top: 32%; left: max(32px, calc((100% - 1160px) / 2));
+    width: min(520px, 44%); margin: 0; text-align: left;
+    transform: translate3d(0, var(--heading-y), 0); opacity: var(--heading-opacity);
+    will-change: transform, opacity;
+  }
+  .hero-companies-scene--scrub .companies-block {
+    padding-top: 40px; margin-top: calc(var(--scene-stage-height) * -.28);
+    /* Native hash links skip the scrub and align the released heading above the cards. */
+    scroll-margin-top: calc(var(--scene-stage-height) * .4);
+  }
+}
+
 /* 02. Dynamic catalog. */
 .companies-block { background: #fff; }
 .companies-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
