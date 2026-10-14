@@ -121,9 +121,9 @@ p { line-height: 1.7; }
 .hero-bottomline { display: flex; justify-content: space-between; gap: 20px; padding-block: 34px; color: var(--muted); font-size: 11px; }
 
 /* One sticky stage and one pair of devices, shared with the actual catalog heading.
-   The ordinary document layout is the default for touch-sized and reduced-motion views. */
+   Only reduced-motion views use the ordinary sequential document layout. */
 .hero-companies-scene { position: relative; }
-@media (min-width: 801px) and (min-height: 800px) and (prefers-reduced-motion: no-preference) {
+@media (prefers-reduced-motion: no-preference) {
   .hero-companies-scene--scrub {
     --scene-top: 112px;
     --scene-height: 320svh;
@@ -154,7 +154,7 @@ p { line-height: 1.7; }
     opacity: var(--desktop-opacity); will-change: transform, opacity;
   }
   .hero-companies-scene--scrub .hero-phone {
-    position: absolute; left: 0; top: 0; width: clamp(200px, min(18vw, calc(var(--scene-stage-height) * .4)), 320px);
+    position: absolute; left: 0; top: 0; width: min(clamp(200px, 18vw, 320px), calc(var(--scene-stage-height) * .4));
     margin: 0; transform-origin: center top;
     transform: translate3d(var(--phone-x), var(--phone-y), 0) translateX(-50%) perspective(1200px) rotateX(var(--phone-tilt)) rotateZ(var(--phone-roll)) scale(var(--phone-scale));
     opacity: var(--phone-opacity); will-change: transform, opacity;
@@ -180,6 +180,32 @@ p { line-height: 1.7; }
     padding-top: 40px; margin-top: calc(var(--scene-stage-height) * -.28);
     /* Native hash links skip the scrub and align the released heading above the cards. */
     scroll-margin-top: calc(var(--scene-stage-height) * .4);
+  }
+  @media (max-width: 1100px) {
+    .hero-companies-scene--scrub .hero-phone {
+      width: min(22vw, 240px, calc(var(--scene-stage-height) * .4));
+    }
+  }
+  @media (max-width: 800px) {
+    .hero-companies-scene--scrub { --scene-height: 260svh; }
+    .hero-companies-scene--scrub .companies-heading {
+      left: 20px; width: 48%;
+    }
+  }
+  @media (max-width: 600px) {
+    .hero-companies-scene--scrub { --scene-top: 96px; --scene-height: 240svh; }
+    .hero-companies-scene--scrub .hero-copy { padding-top: 12px; }
+    .hero-companies-scene--scrub .hero-art .desktop-frame { left: 6%; width: 88%; }
+    .hero-companies-scene--scrub .hero-phone {
+      width: min(31vw, calc(var(--scene-stage-height) * .3));
+    }
+    .hero-companies-scene--scrub .companies-heading {
+      top: 4%; left: 16px; width: calc(100% - 32px);
+    }
+    .hero-companies-scene--scrub .companies-block {
+      margin-top: calc(var(--scene-stage-height) * -.15);
+      scroll-margin-top: calc(var(--scene-stage-height) * .8);
+    }
   }
 }
 

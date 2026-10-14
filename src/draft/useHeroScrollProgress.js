@@ -19,6 +19,25 @@ const tracks = {
   'background': [[0, 0], [0.55, 0], [0.85, 1]],
 }
 
+// A stacked handoff leaves room for the real catalog heading on narrow screens.
+// These are position keyframes too: touch scrolling uses the same reversible scrub.
+const narrowTracks = {
+  ...tracks,
+  'desktop-y': [[0, 0.5], [0.5, 0.24], [0.78, 0.2]],
+  'desktop-tilt': [[0, 32], [0.5, 0]],
+  'desktop-scale': [[0, 1], [0.5, 0.94], [0.78, 0.72]],
+  'phone-x': [[0, 0.74], [0.5, 0.74], [0.8, 0.5]],
+  'phone-y': [[0, 0.5], [0.5, 0.22], [0.8, 0.52], [1, 0.49]],
+  'phone-tilt': [[0, 28], [0.5, 0]],
+  'phone-roll': [[0, -5], [0.5, 0]],
+}
+
+const tabletTracks = {
+  ...tracks,
+  'phone-tilt': [[0, 38], [0.5, 0]],
+  'phone-roll': [[0, -6], [0.5, 0]],
+}
+
 function sample(progress, keyframes) {
   for (let i = 1; i < keyframes.length; i++) {
     const [end, to] = keyframes[i]
@@ -36,6 +55,7 @@ export function useHeroScrollProgress(sceneRef) {
   let start = 0, range = 1, stageHeight = 0, viewportWidth = 0, copyHeight = 0, desktopFit = 1
   let lastProgress = -1
   let disposed = false
+  let activeTracks = tracks
 
   function update() {
     frame = 0
@@ -43,7 +63,7 @@ export function useHeroScrollProgress(sceneRef) {
     const progress = Math.min(1, Math.max(0, (window.scrollY - start) / range))
     if (progress === lastProgress) return
     lastProgress = progress
-    const values = Object.fromEntries(Object.entries(tracks).map(([key, frames]) => [key, sample(progress, frames)]))
+    const values = Object.fromEntries(Object.entries(activeTracks).map(([key, frames]) => [key, sample(progress, frames)]))
     scene.style.setProperty('--scene-progress', progress)
     for (const [key, value] of Object.entries(values)) {
       let unit = ''
@@ -52,7 +72,7 @@ export function useHeroScrollProgress(sceneRef) {
       else if (['copy-y', 'desktop-y', 'phone-y'].includes(key)) {
         resolved *= stageHeight
         if (key !== 'copy-y') {
-          const initialTop = tracks[key][0][1] * stageHeight
+          const initialTop = activeTracks[key][0][1] * stageHeight
           resolved += Math.max(0, copyHeight + 32 - initialTop) * (1 - Math.min(1, progress / 0.5))
         }
         unit = 'px'
@@ -86,6 +106,7 @@ export function useHeroScrollProgress(sceneRef) {
     copyHeight = copy.offsetHeight
     desktopFit = Math.min(1, stageHeight * 0.8 / (scene.querySelector('.desktop-frame').offsetHeight * 0.94))
     viewportWidth = document.documentElement.clientWidth
+    activeTracks = viewportWidth <= 600 ? narrowTracks : viewportWidth <= 1100 ? tabletTracks : tracks
     const pinStart = hero.getBoundingClientRect().top + window.scrollY - parseFloat(stageStyle.top)
     start = Math.max(0, pinStart)
     range = Math.max(1, pinStart + hero.offsetHeight - stageHeight - start)
@@ -98,7 +119,7 @@ export function useHeroScrollProgress(sceneRef) {
     hero = scene.querySelector('#hero')
     stage = scene.querySelector('.hero-stage')
     copy = scene.querySelector('.hero-copy')
-    media = matchMedia('(min-width: 801px) and (min-height: 800px) and (prefers-reduced-motion: no-preference)')
+    media = matchMedia('(prefers-reduced-motion: no-preference)')
     measure()
     media.addEventListener('change', measure)
     window.addEventListener('scroll', queueUpdate, { passive: true })
