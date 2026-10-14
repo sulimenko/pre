@@ -4,16 +4,14 @@ import DraftButton from './DraftButton.vue'
 
 <template>
   <section id="hero" class="hero-block">
-    <div class="section-shell hero-layout">
-      <div class="hero-copy">
-        <div class="eyebrow"><span class="eyebrow-dot"></span> PRIVATE MARKETS · PRE-IPO</div>
+    <div class="hero-layout">
+      <div class="section-shell hero-copy">
         <h1>Инвестируйте в <em>Pre-IPO компании</em> раньше рынка</h1>
         <p class="hero-description">Покупайте акции частных компаний по актуальным условиям уже сейчас. Скоро — с возможностью прямой торговли через терминал Partner Finance.</p>
         <div class="hero-buttons">
           <DraftButton label="Смотреть доступные компании" href="#companies" tone="primary" arrow />
           <DraftButton label="Скачать приложение" tone="outline" />
         </div>
-        <div class="hero-footnote"><span class="status-pulse"></span> 5 Pre-IPO компаний в текущем каталоге</div>
       </div>
       <div class="hero-art" aria-label="Заглушки реальных экранов терминала и мобильного приложения">
         <div class="hero-halo"></div>
@@ -37,7 +35,6 @@ import DraftButton from './DraftButton.vue'
             <span class="phone-screen-note">Будущий экран Pre-IPO. Реальный скриншот добавим после готовности функции.</span>
           </div>
         </div>
-        <div class="hero-art-caption"><span class="caption-line"></span> Телефон — главный объект первой сцены</div>
       </div>
     </div>
     <div class="hero-bottomline section-shell"><span>01 / 10</span><span>Листайте, чтобы изучить возможности <span aria-hidden="true">↓</span></span></div>
