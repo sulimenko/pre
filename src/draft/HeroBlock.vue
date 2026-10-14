@@ -13,27 +13,26 @@ import DraftButton from './DraftButton.vue'
           <DraftButton label="Скачать приложение" tone="outline" />
         </div>
       </div>
-      <div class="hero-art" aria-label="Заглушки реальных экранов терминала и мобильного приложения">
-        <div class="hero-halo"></div>
+      <div class="hero-art" aria-label="Реальные экраны торгового терминала Partner Finance">
         <div class="desktop-frame">
-          <div class="frame-bar"><span></span><span></span><span></span><b>PBULL TERMINAL</b></div>
-          <div class="desktop-placeholder">
-            <div class="placeholder-icon">▤</div>
-            <div class="placeholder-kicker">ЗАГЛУШКА · DESKTOP</div>
-            <strong>Терминал Partner Finance</strong>
-            <p>Сюда поставим реальный скриншот<br>десктопного интерфейса</p>
-          </div>
+          <img
+            class="hero-desktop-screenshot"
+            src="/assets/hero-trading-desktop.png"
+            width="1918"
+            height="961"
+            alt="Десктопный терминал Partner Finance: график AVPT, портфель и форма торговой заявки"
+            decoding="async"
+          />
         </div>
         <div class="phone-frame hero-phone">
-          <div class="phone-island"></div>
-          <div class="phone-screen">
-            <div class="phone-brand">PBULL <span>BY PARTNER FINANCE</span></div>
-            <div class="placeholder-icon">▦</div>
-            <div class="placeholder-kicker">ЗАГЛУШКА · MOBILE</div>
-            <strong>Pre-IPO предложения</strong>
-            <p>Apptronik · Polymarket<br>Lambda · Perplexity<br>SambaNova</p>
-            <span class="phone-screen-note">Будущий экран Pre-IPO. Реальный скриншот добавим после готовности функции.</span>
-          </div>
+          <img
+            class="hero-phone-screenshot"
+            src="/assets/hero-trading-mobile.png"
+            width="367"
+            height="790"
+            alt="Мобильный терминал Partner Finance: график AVPT и форма покупки или продажи"
+            decoding="async"
+          />
         </div>
       </div>
     </div>
