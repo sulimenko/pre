@@ -66,7 +66,7 @@ const calculation = computed(() => {
             <span class="preipo-visual-icon" aria-hidden="true">◇</span>
             <strong>{{ company.name }}</strong><small>{{ company.subsector }}</small>
           </div>
-          <figcaption>{{ company.photo ? 'Изображение из пользовательского архива · ' + company.name : 'Брендовая иллюстрация по пользовательскому архиву · ' + company.name }}</figcaption>
+          <figcaption>{{ company.photoCaption || (company.photo ? 'Изображение из пользовательского архива · ' + company.name : 'Брендовая иллюстрация по пользовательскому архиву · ' + company.name) }}</figcaption>
         </figure>
 
         <section class="preipo-box preipo-terms" aria-labelledby="preipo-terms-title">
