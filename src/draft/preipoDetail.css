@@ -1,0 +1,99 @@
+/* Namespaced detail styles; the original landing and header retain their styles. */
+.preipo-detail { padding-block: 32px 56px; font-size: 13px; line-height: 1.7; overflow-wrap: anywhere; }
+.preipo-detail h1 { font-size: clamp(24px, 3vw, 38px); }
+.preipo-detail h2 { font-size: 18px; letter-spacing: -.025em; line-height: 1.4; }
+.preipo-detail h3 { font-size: 13px; letter-spacing: 0; margin-bottom: 12px; }
+.preipo-detail ul, .preipo-detail ol { margin-block: 14px; padding-left: 20px; }
+.preipo-detail li + li { margin-top: 12px; }
+.preipo-backline, .preipo-titlebar, .preipo-identity, .preipo-switcher, .preipo-box-head, .preipo-bottom-nav { display: flex; align-items: center; gap: 16px; }
+.preipo-backline, .preipo-titlebar, .preipo-box-head, .preipo-bottom-nav { justify-content: space-between; }
+.preipo-backline a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: var(--green); font-weight: 600; }
+.preipo-backline a span { font-size: 26px; }
+.preipo-label { color: var(--green); font-size: 10px; font-weight: 700; letter-spacing: .06em; }
+.preipo-titlebar { margin-block: 24px; }
+.preipo-identity { min-width: 0; }
+.preipo-identity p { color: var(--muted); font-size: 12px; margin-top: 6px; }
+.preipo-logo { display: grid; place-items: center; width: 60px; height: 60px; padding: 9px; flex-shrink: 0; background: #fff; border: 1px solid var(--line); border-radius: 12px; }
+.preipo-logo img { width: 100%; height: 100%; object-fit: contain; }
+.preipo-switcher { flex-shrink: 0; gap: 10px; }
+.preipo-switcher a { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 9px; background: #fff; font-size: 20px; }
+.preipo-switcher small { color: var(--muted); }
+.preipo-banner, .preipo-demo-note { padding: 14px 16px; border: 1px solid #bbcfc0; border-radius: 10px; background: var(--soft); color: var(--green); }
+.preipo-banner { margin-bottom: 24px; }
+.preipo-layout { display: grid; grid-template-columns: minmax(0, 2fr) minmax(300px, 1fr); gap: 20px; align-items: start; }
+.preipo-box { min-width: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); }
+.preipo-box-head { min-height: 64px; padding: 18px 20px; border-bottom: 1px solid var(--line); flex-wrap: wrap; gap: 8px; }
+.preipo-left-column, .preipo-right-column { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.preipo-notes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.preipo-body { padding: 20px; }
+.preipo-fields { margin: 0; }
+.preipo-fields dt { color: var(--muted); font-size: 11px; margin-bottom: 7px; }
+.preipo-fields dd { margin: 0; font-weight: 600; font-size: 14px; }
+.preipo-terms-grid, .preipo-metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px 14px; padding: 24px 20px; }
+.preipo-footnote { padding: 12px 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; }
+.preipo-about-grid { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 24px; }
+.preipo-about-grid .preipo-fields > div + div { margin-top: 16px; }
+.preipo-photo { margin: 0 20px 20px; }
+.preipo-photo > img, .preipo-photo-placeholder { width: 100%; height: clamp(205px, 23vw, 320px); border-radius: 12px; object-fit: cover; }
+.preipo-photo figcaption { margin-top: 8px; font-size: 10px; color: var(--muted); }
+.preipo-photo-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; background: repeating-linear-gradient(0deg, transparent, transparent 31px, #27645110 32px), repeating-linear-gradient(90deg, #eef2ed, #eef2ed 31px, #27645110 32px); color: var(--green); }
+.preipo-photo-placeholder > span { font-size: 56px; line-height: 1.2; }
+.preipo-photo-placeholder > strong { font-size: 22px; }
+.preipo-photo-placeholder > p { font-size: 12px; }
+.preipo-extra-metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; border-top: 1px solid var(--line); padding: 20px; background: #f8faf7; }
+.preipo-input { display: block; margin-top: 20px; font-weight: 600; font-size: 12px; }
+.preipo-input input { display: block; width: 100%; min-width: 0; margin-top: 8px; padding: 14px 12px; border: 1px solid #a9b9ae; border-radius: 9px; background: #f8faf7; font: inherit; color: var(--ink); }
+.preipo-input input:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; }
+.preipo-help { margin-top: 12px; color: var(--muted); font-size: 11px; }
+.preipo-result { margin-top: 16px; padding: 14px; border-radius: 9px; background: var(--soft); font-size: 12px; }
+.preipo-calculator .draft-btn { margin-top: 20px; width: 100%; justify-content: space-between; }
+.preipo-guide-list li { padding-left: 4px; }
+.preipo-example { border-top: 1px dashed #a9b9ae; margin-top: 20px; padding-top: 20px; font-size: 12px; }
+.preipo-example h3 { color: var(--green); }
+.preipo-bottom-nav { margin-top: 28px; flex-wrap: wrap; }
+.preipo-bottom-nav a { display: inline-flex; justify-content: center; align-items: center; padding: 12px 16px; min-height: 48px; border: 1px solid var(--line); border-radius: 9px; color: var(--green); background: #fff; }
+.preipo-detail a:hover { color: #1e5141; }
+.preipo-switcher a:hover, .preipo-bottom-nav a:hover { background: var(--soft); border-color: var(--green); }
+.preipo-disclaimer { margin-top: 24px; padding: 20px; border-radius: 12px; background: var(--soft); color: var(--muted); font-size: 12px; }
+@media (max-width: 1100px) {
+  .preipo-terms-grid, .preipo-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .preipo-about-grid, .preipo-notes { grid-template-columns: minmax(0, 1fr); }
+  .preipo-layout { gap: 16px; }
+}
+@media (max-width: 800px) {
+  .preipo-layout { display: flex; flex-direction: column; }
+  .preipo-left-column, .preipo-right-column { display: contents; }
+  .preipo-terms { order: 1; }
+  .preipo-calculator { order: 2; }
+  .preipo-about { order: 3; }
+  .preipo-guide { order: 4; }
+  .preipo-financials { order: 5; }
+  .preipo-investors { order: 6; }
+  .preipo-notes { order: 7; }
+  .preipo-layout section, .preipo-notes { width: 100%; }
+  .preipo-titlebar { align-items: flex-start; }
+  .preipo-logo { width: 44px; height: 44px; padding: 6px; }
+  .preipo-identity { gap: 10px; }
+  .preipo-identity p { font-size: 10px; }
+  .preipo-switcher { gap: 6px; }
+  .preipo-switcher span { font-size: 11px; }
+  .preipo-body, .preipo-box-head { padding: 18px; }
+  .preipo-photo { margin: 0 18px 18px; }
+  .preipo-photo > img, .preipo-photo-placeholder { height: clamp(205px, 45vw, 320px); }
+  .preipo-notes { gap: 16px; }
+}
+@media (max-width: 480px) {
+  .preipo-detail { padding-top: 18px; }
+  .preipo-backline { gap: 8px; align-items: flex-start; }
+  .preipo-backline a { font-size: 11px; }
+  .preipo-backline > .preipo-label { padding-top: 13px; font-size: 8px; }
+  .preipo-titlebar { flex-wrap: wrap; gap: 12px; }
+  .preipo-switcher { margin-left: auto; }
+  .preipo-extra-metrics { grid-template-columns: minmax(0, 1fr); }
+  .preipo-bottom-nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .preipo-bottom-nav a { font-size: 11px; padding: 12px 8px; }
+  .preipo-bottom-nav a:nth-child(2) { grid-column: 1 / -1; grid-row: 2; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .preipo-detail *, .preipo-detail *::before, .preipo-detail *::after { animation: none !important; transition: none !important; }
+}

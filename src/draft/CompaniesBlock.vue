@@ -1,6 +1,6 @@
 <script setup>
 import { COMPANIES, MIN } from '../data/companies'
-import DraftButton from './DraftButton.vue'
+import { companyDetailHref } from './preipoDetailData'
 const statusTone = { hot: 'available', lim: 'limited', open: 'open' }
 </script>
 
@@ -18,7 +18,8 @@ const statusTone = { hot: 'available', lim: 'limited', open: 'open' }
         </div>
       </div>
       <div class="companies-grid">
-        <article v-for="company in COMPANIES" :key="company.id" class="company-card">
+        <a v-for="company in COMPANIES" :key="company.id" class="company-card company-card--link"
+          :href="companyDetailHref(company.id)" :data-company-id="company.id" :aria-label="'Подробнее о ' + company.name">
           <div class="company-card-top">
             <div class="company-logo"><img :src="company.logo" :alt="'Логотип ' + company.name" /></div>
             <span class="company-status" :class="'company-status--' + (statusTone[company.status] || 'open')">
@@ -34,10 +35,16 @@ const statusTone = { hot: 'available', lim: 'limited', open: 'open' }
             <div><span>Цена за акцию</span><strong>{{ company.price }}</strong></div>
             <div><span>Мин. инвестиции</span><strong>{{ company.minimum || MIN }}</strong></div>
           </div>
-          <DraftButton label="Запросить детали" :context="'Запросить детали: ' + company.name" tone="card" arrow />
-        </article>
+          <span class="draft-btn draft-btn--card">Подробнее <span aria-hidden="true">↗</span></span>
+        </a>
       </div>
       <p class="data-note">* Стоимость и доступность перенесены из предыдущего макета и будут уточнены перед публикацией. Каталог рассчитан на добавление новых компаний.</p>
     </div>
   </section>
 </template>
+
+<style scoped>
+.company-card--link:hover { border-color: var(--green); }
+.company-card--link:focus-visible { outline: 3px solid var(--green); outline-offset: 5px; }
+.company-card--link:hover .draft-btn--card { background: #e4ece5; border-color: var(--green); }
+</style>
