@@ -33,13 +33,16 @@
 .preipo-footnote { padding: 12px 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; }
 .preipo-about-grid { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 24px; }
 .preipo-about-grid .preipo-fields > div + div { margin-top: 16px; }
-.preipo-photo { margin: 0 20px 20px; }
-.preipo-photo > img, .preipo-photo-placeholder { width: 100%; height: clamp(205px, 23vw, 320px); border-radius: 12px; object-fit: cover; }
+.preipo-photo { margin: 0; width: 100%; }
+.preipo-photo > img, .preipo-generated-visual { display: block; width: 100%; height: clamp(220px, 32vw, 400px); border-radius: var(--radius); object-fit: cover; }
 .preipo-photo figcaption { margin-top: 8px; font-size: 10px; color: var(--muted); }
-.preipo-photo-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; background: repeating-linear-gradient(0deg, transparent, transparent 31px, #27645110 32px), repeating-linear-gradient(90deg, #eef2ed, #eef2ed 31px, #27645110 32px); color: var(--green); }
-.preipo-photo-placeholder > span { font-size: 56px; line-height: 1.2; }
-.preipo-photo-placeholder > strong { font-size: 22px; }
-.preipo-photo-placeholder > p { font-size: 12px; }
+/* Archive-derived Polymarket illustration, isolated from the landing styles. */
+.preipo-generated-visual { position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; background: radial-gradient(circle at 75% 22%, #d0e6f3 0, transparent 38%), linear-gradient(130deg, #1b355e, #5375bd); color: #fff; }
+.preipo-visual-grid { position: absolute; inset: 0; background-image: linear-gradient(#ffffff1c 1px, transparent 1px), linear-gradient(90deg, #ffffff1c 1px, transparent 1px); background-size: 34px 34px; transform: perspective(600px) rotateX(26deg) scale(1.5); }
+.preipo-generated-visual > :not(.preipo-visual-grid) { position: relative; z-index: 1; }
+.preipo-visual-icon { font-size: 60px; line-height: 1; opacity: .55; }
+.preipo-generated-visual > strong { font-size: clamp(25px, 3vw, 35px); font-weight: 750; line-height: 1.2; }
+.preipo-generated-visual > small { font-size: 13px; }
 .preipo-extra-metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; border-top: 1px solid var(--line); padding: 20px; background: #f8faf7; }
 .preipo-input { display: block; margin-top: 20px; font-weight: 600; font-size: 12px; }
 .preipo-input input { display: block; width: 100%; min-width: 0; margin-top: 8px; padding: 14px 12px; border: 1px solid #a9b9ae; border-radius: 9px; background: #f8faf7; font: inherit; color: var(--ink); }
@@ -63,6 +66,7 @@
 @media (max-width: 800px) {
   .preipo-layout { display: flex; flex-direction: column; }
   .preipo-left-column, .preipo-right-column { display: contents; }
+  .preipo-photo { order: 0; }
   .preipo-terms { order: 1; }
   .preipo-calculator { order: 2; }
   .preipo-about { order: 3; }
@@ -78,8 +82,7 @@
   .preipo-switcher { gap: 6px; }
   .preipo-switcher span { font-size: 11px; }
   .preipo-body, .preipo-box-head { padding: 18px; }
-  .preipo-photo { margin: 0 18px 18px; }
-  .preipo-photo > img, .preipo-photo-placeholder { height: clamp(205px, 45vw, 320px); }
+  .preipo-photo > img, .preipo-generated-visual { height: clamp(205px, 45vw, 320px); }
   .preipo-notes { gap: 16px; }
 }
 @media (max-width: 480px) {

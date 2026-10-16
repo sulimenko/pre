@@ -59,6 +59,16 @@ const calculation = computed(() => {
 
     <div class="preipo-layout">
       <div class="preipo-left-column">
+        <figure class="preipo-photo">
+          <img v-if="company.photo" :src="company.photo" :alt="company.photoAlt" />
+          <div v-else class="preipo-generated-visual" role="img" :aria-label="'Иллюстрация ' + company.name + ': синий градиент, перспективная сетка и ромб'">
+            <span class="preipo-visual-grid" aria-hidden="true"></span>
+            <span class="preipo-visual-icon" aria-hidden="true">◇</span>
+            <strong>{{ company.name }}</strong><small>{{ company.subsector }}</small>
+          </div>
+          <figcaption>{{ company.photo ? 'Изображение из пользовательского архива · ' + company.name : 'Брендовая иллюстрация по пользовательскому архиву · ' + company.name }}</figcaption>
+        </figure>
+
         <section class="preipo-box preipo-terms" aria-labelledby="preipo-terms-title">
           <header class="preipo-box-head"><h2 id="preipo-terms-title">Условия Pre-IPO</h2><span class="preipo-label">Ожидает подтверждения</span></header>
           <dl class="preipo-fields preipo-terms-grid">
@@ -73,13 +83,6 @@ const calculation = computed(() => {
             <div><h3>Индустрия</h3><dl class="preipo-fields"><div><dt>Сектор</dt><dd>{{ company.industry }}</dd></div><div><dt>Подсектор</dt><dd>{{ company.subsector }}</dd></div></dl></div>
             <div><h3>{{ company.name }}</h3><p>{{ company.description }}</p><p class="preipo-help">Черновое описание из пользовательского архива; ожидает согласования.</p></div>
           </div>
-          <figure class="preipo-photo">
-            <img v-if="company.photo" :src="company.photo" :alt="company.photoAlt" />
-            <div v-else class="preipo-photo-placeholder" role="img" aria-label="Графическая заглушка Polymarket. Фотография ожидает подтверждения.">
-              <span aria-hidden="true">◇</span><strong>Polymarket</strong><p>Место для изображения</p>
-            </div>
-            <figcaption>{{ company.photo ? 'Изображение из пользовательского архива · ' + company.name : 'Графическая заглушка · фотография ожидает подтверждения' }}</figcaption>
-          </figure>
         </section>
 
         <section class="preipo-box preipo-financials" aria-labelledby="preipo-financials-title">
