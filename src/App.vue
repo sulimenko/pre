@@ -15,6 +15,7 @@ const selectedCompany = computed(() => detailCompanies.find(company => company.i
 const notice = ref('')
 let noticeTimeout
 let navigationVersion = 0
+let pendingCatalogReturn = null
 const originalScrollRestoration = history.scrollRestoration
 history.scrollRestoration = 'manual'
 
@@ -33,6 +34,11 @@ function homeHref(hash = location.hash) {
 
 function catalogHref() {
   return homeHref(history.state?.preipoReturn ? location.hash : '#companies')
+}
+
+function detailHistoryDepth() {
+  const depth = history.state?.preipoDetailDepth
+  return Number.isSafeInteger(depth) && depth > 0 ? depth : 0
 }
 
 // The landing's mount hooks measure the scene first. Restore before paint and
@@ -63,12 +69,14 @@ async function restoreView(target = {}) {
 }
 
 function openCompany(id, href) {
+  if (pendingCatalogReturn) return
+  const depth = selectedCompanyId.value ? detailHistoryDepth() + 1 : 1
   let returnTarget = history.state?.preipoReturn
   if (!selectedCompanyId.value) {
     returnTarget = { scrollY: window.scrollY, focusCompanyId: id }
     history.replaceState({ ...history.state, preipoLanding: returnTarget }, '', location.href)
   }
-  history.pushState({ preipoReturn: returnTarget }, '', href)
+  history.pushState({ preipoReturn: returnTarget, preipoDetailDepth: depth }, '', href)
   selectedCompanyId.value = id
   restoreView()
 }
@@ -76,8 +84,18 @@ function openCompany(id, href) {
 function returnToCatalog(event) {
   if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
   event.preventDefault()
+  if (pendingCatalogReturn) return
   const target = history.state?.preipoReturn || { hash: '#companies' }
-  history.pushState({ preipoLanding: target }, '', catalogHref())
+  const depth = detailHistoryDepth()
+  if (depth) {
+    // Skip the whole detail chain. Its original entry survives reloads because
+    // each pushed detail records its distance from that entry in history.state.
+    pendingCatalogReturn = { target, href: catalogHref() }
+    history.go(-depth)
+    return
+  }
+  // A direct link has no catalog entry to return to; replace it instead.
+  history.replaceState({ ...history.state, preipoReturn: null, preipoDetailDepth: 0, preipoLanding: target }, '', catalogHref())
   selectedCompanyId.value = ''
   restoreView(target)
 }
@@ -94,6 +112,7 @@ function handleClick(event) {
     openCompany(id, url.pathname + url.search + url.hash)
   } else if (selectedCompanyId.value && link.closest('.draft-header') && link.getAttribute('href')?.startsWith('#')) {
     event.preventDefault()
+    if (pendingCatalogReturn) return
     const target = { hash: url.hash }
     history.pushState({ preipoLanding: target }, '', homeHref(url.hash))
     selectedCompanyId.value = ''
@@ -102,8 +121,15 @@ function handleClick(event) {
 }
 
 function handlePopState() {
+  const catalogReturn = pendingCatalogReturn
+  pendingCatalogReturn = null
+  if (catalogReturn && readCompany()) {
+    // A chain started at a direct link: turn its first detail entry into the
+    // catalog, keeping later company entries available through browser Forward.
+    history.replaceState({ ...history.state, preipoReturn: null, preipoDetailDepth: 0, preipoLanding: catalogReturn.target }, '', catalogReturn.href)
+  }
   selectedCompanyId.value = readCompany()
-  restoreView(history.state?.preipoLanding || { hash: location.hash || '#companies' })
+  restoreView(catalogReturn?.target || history.state?.preipoLanding || { hash: location.hash || '#companies' })
 }
 
 onMounted(() => {
