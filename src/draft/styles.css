@@ -228,7 +228,7 @@ p { line-height: 1.7; }
 .company-terms span { color: var(--muted); font-size: 10px; }
 .company-terms strong { font-size: 17px; }
 
-/* 03. Future trends and a text-only Apptronik placeholder. */
+/* 03. Future trends with Apptronik Apollo photo. */
 .why-block { background: var(--ink); color: #f1f6ee; }
 .why-layout { display: grid; grid-template-columns: 1.25fr 1fr; gap: 80px; align-items: center; }
 .why-block em { color: #bbd5c7; }
@@ -238,12 +238,23 @@ p { line-height: 1.7; }
 .principle-index { color: #bbd5c7; font-size: 11px; padding-top: 5px; }
 .principle h3 { font-size: 17px; }
 .principle p { color: #c3d0cb; font-size: 12px; margin-top: 6px; }
-.robot-area { display: flex; flex-direction: column; justify-content: space-between; min-height: 440px; padding: 28px; border: 1px dashed #65827a; border-radius: var(--radius); background: #21383c; }
-.robot-label { font-size: 10px; line-height: 1.6; letter-spacing: .1em; color: #b9d3c6; }
-.robot-symbol { display: flex; flex-direction: column; gap: 8px; margin-block: 60px; text-align: center; font-family: 'Montserrat', sans-serif; }
-.robot-symbol span { font-size: 22px; color: #b9d3c6; }
-.robot-symbol strong { font-size: clamp(24px, 2.5vw, 34px); font-weight: 500; }
-.robot-note { color: #b9cac3; font-size: 12px; line-height: 1.7; }
+.robot-area {
+  position: relative;
+  min-height: 440px;
+  overflow: hidden;
+  border: 1px dashed #65827a;
+  border-radius: var(--radius);
+  background: #d9dbdd;
+}
+.robot-image {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
 
 /* 04. Six future terminal states, selected by the visitor. */
 .terminal-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
@@ -372,7 +383,6 @@ p { line-height: 1.7; }
   .companies-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
   .why-layout { grid-template-columns: 1fr; }
   .robot-area { min-height: 280px; }
-  .robot-symbol { margin-block: 30px; }
   .terminal-layout { gap: 20px; }
   .terminal-step { padding: 16px 12px; gap: 10px; }
   .terminal-step-text strong { font-size: 13px; }

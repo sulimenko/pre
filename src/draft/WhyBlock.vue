@@ -17,10 +17,15 @@ import { futurePrinciples } from './siteData'
         </div>
       </div>
       <div class="robot-area">
-        <div class="robot-grid"></div>
-        <div class="robot-label">ТЕКСТОВАЯ ЗАГЛУШКА · APPTRONIK</div>
-        <div class="robot-symbol"><span>РОБОТ</span><strong>АПТРОНИК</strong></div>
-        <div class="robot-note">На следующем этапе: сцена с роботом Apptronik и переходом логотипа из карточки компании.</div>
+        <img
+          class="robot-image"
+          src="/assets/apptronik-robot.jpg"
+          alt="Гуманоидный робот Apptronik Apollo"
+          width="1600"
+          height="1018"
+          loading="lazy"
+          decoding="async"
+        />
       </div>
     </div>
   </section>
