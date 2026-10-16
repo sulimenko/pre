@@ -1,0 +1,113 @@
+name: Build and Deploy
+
+on:
+  push:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: preipo-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  sbom:
+    name: SBOM
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Generate SBOM
+        uses: anchore/sbom-action@v0
+        with:
+          path: .
+          format: cyclonedx-json
+          output-file: sbom.cdx.json
+          upload-artifact: true
+          artifact-name: pre-sbom
+
+      - name: Scan Critical vulnerabilities
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          scan-type: sbom
+          scan-ref: sbom.cdx.json
+          severity: CRITICAL
+          format: table
+          output: sbom-critical-report.txt
+          exit-code: "1"
+
+      - name: Upload SBOM vulnerability report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom-critical-report
+          path: sbom-critical-report.txt
+          if-no-files-found: ignore
+          retention-days: 14
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Upload dist
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          if-no-files-found: error
+          retention-days: 7
+
+  deploy:
+    name: Deploy
+    needs: [sbom, build]
+    runs-on: ubuntu-latest
+    env:
+      DEPLOY_HOST: "80.87.194.132"
+      DEPLOY_USER: "deployer"
+      DEPLOY_PATH: "/var/www/preipo"
+    steps:
+      - name: Download dist
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+
+      - name: Add SSH key (base64)
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.PROD_DEPLOY_SSH_KEY_B64 }}" | base64 -d > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          eval "$(ssh-agent -s)"
+          ssh-add ~/.ssh/id_rsa
+
+      - name: Trust host key
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H "${{ env.DEPLOY_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Ensure remote deploy directory
+        run: |
+          ssh "${{ env.DEPLOY_USER }}@${{ env.DEPLOY_HOST }}" \
+            "mkdir -p '${{ env.DEPLOY_PATH }}' && ls -la '${{ env.DEPLOY_PATH }}'"
+
+      - name: Sync dist to server
+        run: |
+          rsync -az --delete \
+            ./dist/ \
+            "${{ env.DEPLOY_USER }}@${{ env.DEPLOY_HOST }}:${{ env.DEPLOY_PATH }}/"

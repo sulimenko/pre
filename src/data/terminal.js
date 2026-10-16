@@ -1,0 +1,10 @@
+export const WL = [{t:'POLY',n:'Polymarket',p:170,c:4.2},{t:'APPX',n:'Apptronik',p:45,c:1.8},{t:'LMDA',n:'Lambda',p:62.5,c:-0.9},{t:'PRPX',n:'Perplexity',p:92.4,c:2.6},{t:'SNVA',n:'SambaNova',p:31.2,c:0.7}];
+
+export const screens=[
+ `<h4>Polymarket</h4><div class="screen-line"><span>Сектор</span><b>Prediction markets</b></div><div class="screen-line"><span>Тезис</span><b>Data × media × behavioral finance</b></div><div class="screen-line"><span>Статус</span><span class="status-pill st-done">Доступно сейчас</span></div><div class="big-btn">Открыть компанию</div>`,
+ `<h4>Условия сделки</h4><div class="screen-line"><span>Цена</span><b>$170 / share</b></div><div class="screen-line"><span>Минимум</span><b>$5 000</b></div><div class="screen-line"><span>Доступный объём</span><b>обновляется</b></div><div class="screen-line"><span>Комиссия</span><b>Прозрачно, до сделки</b></div>`,
+ `<h4>Подача заявки</h4><div class="screen-line"><span>Компания</span><b>Polymarket</b></div><div class="screen-line"><span>Сумма</span><b>$5 000</b></div><div class="big-btn">Подтвердить и разместить</div>`,
+ `<h4>Статус исполнения</h4><div class="screen-line"><span>Заявка</span><span class="status-pill st-done">Принята</span></div><div class="screen-line"><span>Аллокация</span><span class="status-pill st-pending">Pending</span></div><div class="screen-line"><span>Сделка</span><span class="status-pill st-conf">Ожидает подтверждения</span></div>`,
+ `<h4>Уведомления</h4><div class="screen-line"><b>Order received</b><span>только что</span></div><div class="screen-line"><b>Allocation updated</b><span>2 мин</span></div><div class="screen-line"><b>Deal confirmed</b><span>—</span></div>`,
+ `<h4>Портфель</h4><div class="screen-line"><span>Polymarket</span><b>$5 000</b></div><div class="screen-line"><span>Apptronik</span><b>$5 000</b></div><div class="screen-line"><span>Общая стоимость</span><b>616 419,26 $</b></div><div class="screen-line"><span>Статус позиции</span><span class="status-pill st-done">В holdings</span></div>`
+];
