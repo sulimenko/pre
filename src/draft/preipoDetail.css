@@ -13,15 +13,15 @@
 .preipo-titlebar { margin-block: 24px; }
 .preipo-identity { min-width: 0; }
 .preipo-identity p { color: var(--muted); font-size: 12px; margin-top: 6px; }
-.preipo-logo { display: grid; place-items: center; width: 60px; height: 60px; padding: 9px; flex-shrink: 0; background: #fff; border: 1px solid var(--line); border-radius: 12px; }
+.preipo-logo { display: grid; place-items: center; width: 60px; height: 60px; padding: 9px; flex-shrink: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
 .preipo-logo img { width: 100%; height: 100%; object-fit: contain; }
 .preipo-switcher { flex-shrink: 0; gap: 10px; }
-.preipo-switcher a { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 9px; background: #fff; font-size: 20px; }
+.preipo-switcher a { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 9px; background: var(--surface); font-size: 20px; }
 .preipo-switcher small { color: var(--muted); }
-.preipo-banner, .preipo-demo-note { padding: 14px 16px; border: 1px solid #bbcfc0; border-radius: 10px; background: var(--soft); color: var(--green); }
+.preipo-banner, .preipo-demo-note { padding: 14px 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--soft); color: var(--green); }
 .preipo-banner { margin-bottom: 24px; }
 .preipo-layout { display: grid; grid-template-columns: minmax(0, 2fr) minmax(300px, 1fr); gap: 20px; align-items: start; }
-.preipo-box { min-width: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); }
+.preipo-box { min-width: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow-card); }
 .preipo-box-head { min-height: 64px; padding: 18px 20px; border-bottom: 1px solid var(--line); flex-wrap: wrap; gap: 8px; }
 .preipo-left-column, .preipo-right-column { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
 .preipo-notes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
@@ -37,27 +37,29 @@
 .preipo-photo > img, .preipo-generated-visual { display: block; width: 100%; height: clamp(220px, 32vw, 400px); border-radius: var(--radius); object-fit: cover; }
 .preipo-photo figcaption { margin-top: 8px; font-size: 10px; color: var(--muted); }
 /* Archive-derived Polymarket illustration, isolated from the landing styles. */
-.preipo-generated-visual { position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; background: radial-gradient(circle at 75% 22%, #d0e6f3 0, transparent 38%), linear-gradient(130deg, #1b355e, #5375bd); color: #fff; }
-.preipo-visual-grid { position: absolute; inset: 0; background-image: linear-gradient(#ffffff1c 1px, transparent 1px), linear-gradient(90deg, #ffffff1c 1px, transparent 1px); background-size: 34px 34px; transform: perspective(600px) rotateX(26deg) scale(1.5); }
+.preipo-generated-visual { position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; background: var(--pbull-dark-gradient); color: var(--surface); }
+.preipo-visual-grid { position: absolute; inset: 0; background-image: linear-gradient(rgb(255 255 255 / 11%) 1px, transparent 1px), linear-gradient(90deg, rgb(255 255 255 / 11%) 1px, transparent 1px); background-size: 34px 34px; transform: perspective(600px) rotateX(26deg) scale(1.5); }
 .preipo-generated-visual > :not(.preipo-visual-grid) { position: relative; z-index: 1; }
 .preipo-visual-icon { font-size: 60px; line-height: 1; opacity: .55; }
 .preipo-generated-visual > strong { font-size: clamp(25px, 3vw, 35px); font-weight: 750; line-height: 1.2; }
 .preipo-generated-visual > small { font-size: 13px; }
-.preipo-extra-metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; border-top: 1px solid var(--line); padding: 20px; background: #f8faf7; }
+.preipo-extra-metrics { --muted: var(--pbull-label); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; border-top: 1px solid var(--line); padding: 20px; background: var(--pbull-bg); }
 .preipo-input { display: block; margin-top: 20px; font-weight: 600; font-size: 12px; }
-.preipo-input input { display: block; width: 100%; min-width: 0; margin-top: 8px; padding: 14px 12px; border: 1px solid #a9b9ae; border-radius: 9px; background: #f8faf7; font: inherit; color: var(--ink); }
+.preipo-input input { display: block; width: 100%; min-width: 0; margin-top: 8px; padding: 14px 12px; border: 1px solid var(--line-strong); border-radius: 9px; background: var(--pbull-bg); font: inherit; color: var(--ink); }
+.preipo-input input::placeholder { color: var(--muted); opacity: 1; }
+.preipo-input input:hover { border-color: var(--pbull-label); }
 .preipo-input input:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; }
 .preipo-help { margin-top: 12px; color: var(--muted); font-size: 11px; }
 .preipo-result { margin-top: 16px; padding: 14px; border-radius: 9px; background: var(--soft); font-size: 12px; }
 .preipo-calculator .draft-btn { margin-top: 20px; width: 100%; justify-content: space-between; }
 .preipo-guide-list li { padding-left: 4px; }
-.preipo-example { border-top: 1px dashed #a9b9ae; margin-top: 20px; padding-top: 20px; font-size: 12px; }
+.preipo-example { border-top: 1px dashed var(--line-strong); margin-top: 20px; padding-top: 20px; font-size: 12px; }
 .preipo-example h3 { color: var(--green); }
 .preipo-bottom-nav { margin-top: 28px; flex-wrap: wrap; }
-.preipo-bottom-nav a { display: inline-flex; justify-content: center; align-items: center; padding: 12px 16px; min-height: 48px; border: 1px solid var(--line); border-radius: 9px; color: var(--green); background: #fff; }
-.preipo-detail a:hover { color: #1e5141; }
-.preipo-switcher a:hover, .preipo-bottom-nav a:hover { background: var(--soft); border-color: var(--green); }
-.preipo-disclaimer { margin-top: 24px; padding: 20px; border-radius: 12px; background: var(--soft); color: var(--muted); font-size: 12px; }
+.preipo-bottom-nav a { display: inline-flex; justify-content: center; align-items: center; padding: 12px 16px; min-height: 48px; border: 1px solid var(--line); border-radius: 9px; color: var(--green); background: var(--surface); }
+.preipo-detail a:hover { color: var(--ink); }
+.preipo-switcher a:hover, .preipo-bottom-nav a:hover { background: var(--pbull-bg); border-color: var(--green); }
+.preipo-disclaimer { --muted: var(--pbull-label); margin-top: 24px; padding: 20px; border-radius: 12px; background: var(--soft); color: var(--muted); font-size: 12px; }
 @media (max-width: 1100px) {
   .preipo-terms-grid, .preipo-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .preipo-about-grid, .preipo-notes { grid-template-columns: minmax(0, 1fr); }
